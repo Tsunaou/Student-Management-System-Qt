@@ -26,10 +26,12 @@ CONFIG += c++11
 
 SOURCES += \
         main.cpp \
-        StudentMS.cpp
+        StudentMS.cpp \
+    SubWindow.cpp
 
 HEADERS += \
-        StudentMS.h
+        StudentMS.h \
+    SubWindow.h
 
 FORMS += \
         StudentMS.ui
