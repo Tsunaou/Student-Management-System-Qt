@@ -17,10 +17,19 @@ StuDialog::~StuDialog()
     delete ui;
 }
 
-QString StuDialog::getID()
+StuInfoTemplate &StuDialog::getStuInfo()
 {
-    return  this->ui->IDEdit->text();
+    this->stuInfo = StuInfoTemplate(ui->IDEdit->text(),
+                                    ui->NameEdit->text(),
+                                    ui->SexBox->currentText(),
+                                    ui->BirthEdit->text(),
+                                    ui->HomeEdit->text(),
+                                    ui->AddEdit->text());
+    return this->stuInfo;
 }
+
+
+
 
 QVector<QString> StuDialog::getInput()
 {
@@ -33,4 +42,19 @@ QVector<QString> StuDialog::getInput()
     res.push_back(ui->AddEdit->text());
 
     return res;
+}
+
+void StuDialog::setByStuInfo(StuInfoTemplate info)
+{
+    QDateTime time;
+    QString str = info.getBirthday();
+    QStringList sections = str.split(QRegExp("[//]")); //分割birthday
+    time.setDate(QDate(sections.at(0).toInt(),sections.at(1).toInt(),sections.at(2).toInt()));
+
+    ui->IDEdit->setText(info.getID());
+    ui->NameEdit->setText(info.getName());
+    ui->SexBox->setCurrentText(info.getSex());
+    ui->BirthEdit->setDateTime(time);
+    ui->HomeEdit->setText(info.getHometown());
+    ui->AddEdit->setText(info.getAddress());
 }

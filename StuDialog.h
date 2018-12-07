@@ -3,6 +3,11 @@
 
 #include <QDialog>
 #include <QVector>
+#include <QDate>
+#include "StuInfoTemplate.h"
+
+#include <iostream>
+using namespace  std;
 
 namespace Ui {
 class StuDialog;
@@ -15,13 +20,14 @@ class StuDialog : public QDialog
 public:
     explicit StuDialog(QWidget *parent = nullptr);
     ~StuDialog();
-    QString getID();
+    StuInfoTemplate& getStuInfo();
     QVector<QString> getInput();
+    void setByStuInfo(StuInfoTemplate info);
 
 
 private:
     Ui::StuDialog *ui;
-
+    StuInfoTemplate stuInfo;
 };
 
 #endif // STUDIALOG_H

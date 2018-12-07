@@ -13,8 +13,7 @@ StudentMS::StudentMS(QWidget *parent) :
     setWindowTitle(tr("学生信息管理系统"));
 
 
-    //setCentralWidget(ui->mdiArea);
-//    ui->mdiArea->setViewMode(QMdiArea::TabbedView); //设置视口模式：tabBar模式
+    ui->mdiArea->setViewMode(QMdiArea::TabbedView); //设置视口模式：tabBar模式
     ui->mdiArea->setTabPosition(QTabWidget::North); //设置tabBar的位置
     ui->mdiArea->setTabShape(QTabWidget::Rounded); //设置tab形状
     ui->mdiArea->setTabsClosable(true); //tab可关闭
@@ -48,7 +47,7 @@ void StudentMS::on_actionNew_triggered()
     tableIndex++;
     WindMap.insert(child,tableIndex);
 
-    child->setWindowTitle(tr("学生信息%1").arg(tableIndex));
+    child->setWindowTitle(tr("学生信息表%1").arg(tableIndex+1));
     child->resize(700,700);
     child->show();
 }

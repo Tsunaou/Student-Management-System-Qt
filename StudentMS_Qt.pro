@@ -28,13 +28,14 @@ SOURCES += \
         main.cpp \
         StudentMS.cpp \
     StuDialog.cpp \
-    StuSubWindow.cpp
+    StuSubWindow.cpp \
+    StuInfoTemplate.cpp
 
 HEADERS += \
         StudentMS.h \
-    SubWindow.h \
     StuDialog.h \
-    StuSubWindow.h
+    StuSubWindow.h \
+    StuInfoTemplate.h
 
 FORMS += \
         StudentMS.ui \
