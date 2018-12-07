@@ -3,6 +3,8 @@
 #include <QMdiSubWindow>
 #include <QTableWidget>
 #include <QMessageBox>
+#include <QDebug>
+#include "StuDialog.h"
 
 class SubWindow : public QWidget
 {
