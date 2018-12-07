@@ -41,7 +41,7 @@ int StudentMS::getActiveTalbeIndex()
 
 void StudentMS::on_actionNew_triggered()
 {
-    SubWindow *newWnd = new SubWindow();
+    StuSubWindow *newWnd = new StuSubWindow();
     subWnds.push_back(newWnd);
 
     QMdiSubWindow *child = ui->mdiArea->addSubWindow(newWnd);
@@ -58,10 +58,10 @@ void StudentMS::on_actionAdd_triggered()
     int activeIndex = this->getActiveTalbeIndex();
     if(activeIndex == -1){
         QMessageBox::warning(this,tr("提示"),
-                 tr("您当前未创建文件，请先创建一个文件"));
+                 tr("您当前未创建文件，请先创建一个文件。"));
         return;
     }
-    subWnds[activeIndex]->addNewItem();
+    subWnds[activeIndex]->addLine();
 }
 
 void StudentMS::on_actionAbout_triggered()

@@ -2,10 +2,14 @@
 #define STUDENTMS_H
 
 #include <QMainWindow>
-#include "SubWindow.h"
+#include <QMdiSubWindow>
 #include <QVector>
 #include <QMap>
 #include <QDebug>
+#include <QMessageBox>
+
+#include "StuSubWindow.h"
+#include "StuDialog.h"
 
 namespace Ui {
 class StudentMS;
@@ -28,7 +32,7 @@ private slots:
 
 private:
     Ui::StudentMS *ui;
-    QVector<SubWindow*> subWnds;
+    QVector<StuSubWindow*> subWnds;
     QMap<QMdiSubWindow*,int> WindMap;
 
     int tableIndex;

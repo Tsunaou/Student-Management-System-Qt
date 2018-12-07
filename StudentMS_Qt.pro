@@ -27,20 +27,19 @@ CONFIG += c++11
 SOURCES += \
         main.cpp \
         StudentMS.cpp \
-    SubWindow.cpp \
     StuDialog.cpp \
-    StuTable.cpp
+    StuSubWindow.cpp
 
 HEADERS += \
         StudentMS.h \
     SubWindow.h \
     StuDialog.h \
-    StuTable.h
+    StuSubWindow.h
 
 FORMS += \
         StudentMS.ui \
     StuDialog.ui \
-    stutable.ui
+    StuSubWindow.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
