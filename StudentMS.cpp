@@ -14,7 +14,7 @@ StudentMS::StudentMS(QWidget *parent) :
 
 
     //setCentralWidget(ui->mdiArea);
-    ui->mdiArea->setViewMode(QMdiArea::TabbedView); //设置视口模式：tabBar模式
+//    ui->mdiArea->setViewMode(QMdiArea::TabbedView); //设置视口模式：tabBar模式
     ui->mdiArea->setTabPosition(QTabWidget::North); //设置tabBar的位置
     ui->mdiArea->setTabShape(QTabWidget::Rounded); //设置tab形状
     ui->mdiArea->setTabsClosable(true); //tab可关闭
@@ -31,6 +31,9 @@ StudentMS::~StudentMS()
 
 int StudentMS::getActiveTalbeIndex()
 {
+    if(this->ui->mdiArea->activeSubWindow()==nullptr){
+        return -1;
+    }
     int i = this->WindMap.find(this->ui->mdiArea->activeSubWindow()).value();
     qDebug()<<"This index is"<<i<<endl;
     return i;
@@ -53,6 +56,11 @@ void StudentMS::on_actionNew_triggered()
 void StudentMS::on_actionAdd_triggered()
 {
     int activeIndex = this->getActiveTalbeIndex();
+    if(activeIndex == -1){
+        QMessageBox::warning(this,tr("提示"),
+                 tr("您当前未创建文件，请先创建一个文件"));
+        return;
+    }
     subWnds[activeIndex]->addNewItem();
 }
 

@@ -5,8 +5,9 @@
 #include <QMessageBox>
 #include <QDebug>
 #include "StuDialog.h"
+#include "StuTable.h"
 
-class SubWindow : public QWidget
+class SubWindow : public StuTable
 {
 public:
     SubWindow();

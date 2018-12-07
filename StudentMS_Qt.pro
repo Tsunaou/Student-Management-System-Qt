@@ -28,16 +28,19 @@ SOURCES += \
         main.cpp \
         StudentMS.cpp \
     SubWindow.cpp \
-    StuDialog.cpp
+    StuDialog.cpp \
+    StuTable.cpp
 
 HEADERS += \
         StudentMS.h \
     SubWindow.h \
-    StuDialog.h
+    StuDialog.h \
+    StuTable.h
 
 FORMS += \
         StudentMS.ui \
-    StuDialog.ui
+    StuDialog.ui \
+    stutable.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
