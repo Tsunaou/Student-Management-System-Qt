@@ -158,6 +158,19 @@ void StudentMS::on_actionSave_triggered()
     subWnds[activeIndex]->saveFile();
 }
 
+
+void StudentMS::on_actionSaveAs_triggered()
+{
+    int activeIndex = this->getActiveTalbeIndex();
+    if(activeIndex == -1){
+        QMessageBox::warning(this,tr("提示"),
+                 tr("您当前未创建(或打开)文件，请先创建一个文件。"));
+        return;
+    }
+    subWnds[activeIndex]->saveFileAs();
+}
+
+
 void StudentMS::on_actionOpen_triggered()
 {
     //open：得到文件路径，文件名，以这个文件名创建窗口，然后导入文件内容
@@ -223,3 +236,4 @@ void StudentMS::on_actionTileSubWindows_triggered()
 {
     ui->mdiArea->tileSubWindows();
 }
+

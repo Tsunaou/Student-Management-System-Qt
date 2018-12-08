@@ -7,9 +7,10 @@ StuSubWindow::StuSubWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     //成员变量初始化
-    tb = ui->tableWidget;
-    filePath = "";
-    flagModified = true;
+    this->tb = ui->tableWidget; //指向窗口中的表格
+    this->filePath = "";        //文件路径
+    this->fileTitle = "";       //文件名
+    this->flagModified = true;  //是否被修改过了
 
     //对表格的一些特性进行处理
     tb->setSelectionBehavior(QAbstractItemView::SelectRows);    //整行选中的方式
@@ -18,12 +19,6 @@ StuSubWindow::StuSubWindow(QWidget *parent) :
 
     //绑定双击事件的信号到处理函数（双击即可改变值）
     connect(tb,SIGNAL(on_tableWidget_cellDoubleClicked(int,int)),this,SLOT(on_tableWidget_cellDoubleClicked(int,int)));
-
-//    //对表头进行设置
-//    QTableWidgetItem *columnHeaderItem0 = tb->horizontalHeaderItem(0); //获得水平方向表头的Item对象
-//    columnHeaderItem0->setFont(QFont("Helvetica")); //设置字体
-//    columnHeaderItem0->setBackgroundColor(QColor(0,60,10)); //设置单元格背景颜色
-//    columnHeaderItem0->setTextColor(QColor(200,111,30)); //设置文字颜色
 
 }
 
@@ -75,34 +70,50 @@ void StuSubWindow::saveFile()
     //保存，是已经打开的，或者保存过的文件保存
     if(filePath == ""){
         this->saveFileAs();
-        QMessageBox::information(this,tr("新文件"),tr("新文件用另存为处理"));
+        //QMessageBox::information(this,tr("新文件"),tr("新文件用另存为处理"));
     }else{
         //就把表格里的内容都存到filePath里就好
-        QFile file(filePath);
-        if(!file.open(QIODevice::WriteOnly | QIODevice::Text))
-        {
-            QMessageBox::warning(this,tr("警告"),tr("打开文件失败"));
-            return;
-        }
-        else
-        {
-            QTextStream textStream(&file);
-            for(int i=0; i <ui->tableWidget->rowCount(); i++)
-            {
-                for(int j=0; j<=5;j++){
-                    textStream << ui->tableWidget->item(i,j)->text()<<" ";
-                }
-                textStream<<endl;
-            }
-             QMessageBox::information(this,tr("提示"),tr("保存成功"));
-            file.close();
-        }
+        this->saveTableTo(filePath);
     }
 }
 
 void StuSubWindow::saveFileAs()
 {
+    QFileDialog fileDialog;
+    QString fileName = fileDialog.getSaveFileName(this,tr("Open File"),"/新表格",tr("Text File(*.txt)"));
 
+    if(fileName == ""){
+        return;
+    }
+    else{
+        QString simpleName = this->getFileNameWithoutFormat(fileName);
+        this->setWindowTitle(simpleName);   //“另存为”成功后，将窗口改名
+        this->filePath = fileName;
+        this->saveTableTo(fileName);
+    }
+}
+
+void StuSubWindow::saveTableTo(QString filepath)
+{
+    QFile file(filepath);
+    if(!file.open(QIODevice::WriteOnly | QIODevice::Text))
+    {
+        QMessageBox::warning(this,tr("警告"),tr("打开文件失败"));
+        return;
+    }
+    else
+    {
+        QTextStream textStream(&file);
+        for(int i=0; i <ui->tableWidget->rowCount(); i++)
+        {
+            for(int j=0; j<=5;j++){
+                textStream << ui->tableWidget->item(i,j)->text()<<" ";
+            }
+            textStream<<endl;
+        }
+        QMessageBox::information(this,tr("提示"),tr("保存成功"));
+        file.close();
+    }
 }
 
 void StuSubWindow::importFile(QString fileName)
@@ -157,6 +168,14 @@ StuInfoTemplate StuSubWindow::getTableForRow(int row)
                            tb->item(row,5)->text());//住址
 }
 
+QString StuSubWindow::getFileNameWithoutFormat(QString filename)
+{
+    QFileInfo fi(filename);
+    QStringList simpleName = fi.fileName().split(QRegExp("[.]"));
+    return simpleName.at(0);
+
+}
+
 void StuSubWindow::closeEvent(QCloseEvent *event)
 {
     QMessageBox::StandardButton button;
@@ -189,6 +208,5 @@ void StuSubWindow::on_tableWidget_cellDoubleClicked(int row, int column)
            tb->item(row,i)->setText(res[i]);
         }
     }
-
 }
 

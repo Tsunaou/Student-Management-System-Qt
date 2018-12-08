@@ -30,12 +30,12 @@ public:
     void closeFile();   //关闭文件
     void saveFile();    //保存
     void saveFileAs();  //另存为
-    void importFile(QString fileName);    //导入文件内容
-
+    void saveTableTo(QString filepath);     //将文件保存到filepath上
+    void importFile(QString fileName);      //导入文件内容
+    void closeEvent(QCloseEvent *event);
+    //数据辅助处理函数
     StuInfoTemplate getTableForRow(int row);    //得到表格某一行的数据
-
-     void closeEvent(QCloseEvent *event);
-
+    QString getFileNameWithoutFormat(QString filename);
 
 private slots:
      void on_tableWidget_cellDoubleClicked(int row, int column);
@@ -44,6 +44,7 @@ private:
     Ui::StuSubWindow *ui;
     QTableWidget* tb;       //当前窗口的表格
     QString filePath;       //文件路径
+    QString fileTitle;      //打开的文件名
     bool flagModified;      //是否被修改过
 
     //QList<StuInfoTemplate> tableLines;  //原计划存储表格，目前来看貌似没什么用

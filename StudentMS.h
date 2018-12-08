@@ -53,6 +53,8 @@ private slots:
     void on_actionAbout_triggered();    //相关信息
 
 
+    void on_actionSaveAs_triggered();
+
 private:
     Ui::StudentMS *ui;
     QVector<StuSubWindow*> subWnds;
