@@ -57,7 +57,7 @@ void StudentMS::on_actionAdd_triggered()
     int activeIndex = this->getActiveTalbeIndex();
     if(activeIndex == -1){
         QMessageBox::warning(this,tr("提示"),
-                 tr("您当前未创建文件，请先创建一个文件。"));
+                 tr("您当前未创建(或打开)文件，请先创建一个文件。"));
         return;
     }
     subWnds[activeIndex]->addLine();
@@ -75,4 +75,101 @@ void StudentMS::on_actionAbout_triggered()
                "<hr/>"
                "<p style=\"text-align: right\">欧阳鸿荣 2018.12</p></p>"
               ));
+}
+
+void StudentMS::on_actionAlter_triggered()
+{
+    int activeIndex = this->getActiveTalbeIndex();
+    if(activeIndex == -1){
+        QMessageBox::warning(this,tr("提示"),
+                 tr("您当前未创建(或打开)文件，请先创建一个文件。"));
+        return;
+    }
+    subWnds[activeIndex]->alterLine();
+}
+
+void StudentMS::on_actionDelete_triggered()
+{
+    int activeIndex = this->getActiveTalbeIndex();
+    if(activeIndex == -1){
+        QMessageBox::warning(this,tr("提示"),
+                 tr("您当前未创建(或打开)文件，请先创建一个文件。"));
+        return;
+    }
+    subWnds[activeIndex]->deleteLine();
+}
+
+void StudentMS::on_actionSortID_triggered()
+{
+    int activeIndex = this->getActiveTalbeIndex();
+    if(activeIndex == -1){
+        QMessageBox::warning(this,tr("提示"),
+                 tr("您当前未创建(或打开)文件，请先创建一个文件。"));
+        return;
+    }
+    subWnds[activeIndex]->sortByID();
+}
+
+void StudentMS::on_actionSortName_triggered()
+{
+    int activeIndex = this->getActiveTalbeIndex();
+    if(activeIndex == -1){
+        QMessageBox::warning(this,tr("提示"),
+                 tr("您当前未创建(或打开)文件，请先创建一个文件。"));
+        return;
+    }
+    subWnds[activeIndex]->sortByName();
+}
+
+void StudentMS::on_actionClose_triggered()
+{
+
+}
+
+void StudentMS::on_actionSave_triggered()
+{
+
+}
+
+void StudentMS::on_actionOpen_triggered()
+{
+    //open：得到文件路径，文件名，以这个文件名创建窗口，然后导入文件内容
+    QString fileName;
+    fileName = QFileDialog::getOpenFileName(this,tr("打开文件"),QDir::currentPath(),tr("Text File (*.txt)"));
+
+    if(fileName == ""){//如果用户直接关闭了文件浏览对话框，那么文件名就为空值，直接返回
+        return;
+    }
+    else{
+       QFile file(fileName);
+       if(!file.open(QIODevice::ReadOnly | QIODevice::Text))
+       {
+           QMessageBox::warning(this,tr("错误"),tr("打开文件失败"));
+           return;
+       }
+       else
+       {
+           if(!file.isReadable())
+           {
+               QMessageBox::warning(this,tr("错误"),tr("该文件不可读"));
+           }
+           else
+           {
+               //该文件可以成功打开
+               this->on_actionNew_triggered();
+               int activeIndex = this->getActiveTalbeIndex();
+               if(activeIndex == -1){
+                   QMessageBox::warning(this,tr("提示"),
+                            tr("您当前未创建(或打开)文件，请先创建一个文件。"));
+                   return;
+               }
+               QFileInfo fi = QFileInfo(fileName);
+               QStringList sections = fi.fileName().split(QRegExp("[.]")); //分割birthday
+               this->ui->mdiArea->activeSubWindow()->setWindowTitle(sections.at(0));
+               subWnds[activeIndex]->importFile(fileName);
+
+           }
+           file.close();
+       }
+    }
 }

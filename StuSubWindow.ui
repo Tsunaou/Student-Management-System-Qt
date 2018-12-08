@@ -23,7 +23,7 @@
      </column>
      <column>
       <property name="text">
-       <string>学号</string>
+       <string>姓名</string>
       </property>
      </column>
      <column>

@@ -6,6 +6,7 @@
 #include <QMdiSubWindow>
 #include <QTableWidget>
 #include <QDebug>
+#include <QFileDialog>
 
 #include "StuDialog.h"
 
@@ -20,9 +21,15 @@ class StuSubWindow : public QWidget
 public:
     explicit StuSubWindow(QWidget *parent = nullptr);
     ~StuSubWindow();
-    void addLine();                             //增加一行数据
-    void alterLine();                           //修改一行数据
-    void deleteLine();                          //删除一行数据
+    void addLine();     //增加一行数据
+    void alterLine();   //修改一行数据
+    void deleteLine();  //删除一行数据
+    void sortByID();    //按照ID排序
+    void sortByName();  //按照姓名排序
+    void saveFile();    //保存
+    void saveFileAs();  //另存为
+    void importFile(QString fileName);    //导入文件内容
+
     StuInfoTemplate getTableForRow(int row);    //得到表格某一行的数据
 
 private slots:
@@ -31,7 +38,12 @@ private slots:
 private:
     Ui::StuSubWindow *ui;
     QTableWidget* tb;       //当前窗口的表格
-    QList<StuInfoTemplate> tableLines;  //原计划存储表格
+    QString filePath;       //文件路径
+    bool flagNew;           //是否新建的文件
+    bool flagAlter;         //是否被修改过
+
+    //QList<StuInfoTemplate> tableLines;  //原计划存储表格，目前来看貌似没什么用
+
 
 };
 

@@ -175,6 +175,9 @@
    <property name="toolTip">
     <string>增加</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+A</string>
+   </property>
   </action>
   <action name="actionAbout">
    <property name="icon">
