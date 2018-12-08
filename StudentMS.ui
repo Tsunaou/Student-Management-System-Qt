@@ -65,6 +65,10 @@
     <property name="title">
      <string>窗口(&amp;W)</string>
     </property>
+    <addaction name="actionTabBar"/>
+    <addaction name="actionWindow"/>
+    <addaction name="actionSascadeSubWindows"/>
+    <addaction name="actionTileSubWindows"/>
    </widget>
    <widget class="QMenu" name="menu_5">
     <property name="title">
@@ -282,6 +286,38 @@
    </property>
    <property name="toolTip">
     <string>另存为</string>
+   </property>
+  </action>
+  <action name="actionTabBar">
+   <property name="text">
+    <string>视窗标签模式</string>
+   </property>
+   <property name="toolTip">
+    <string>视窗标签模式</string>
+   </property>
+  </action>
+  <action name="actionWindow">
+   <property name="text">
+    <string>视窗窗口模式</string>
+   </property>
+   <property name="toolTip">
+    <string>视窗窗口模式</string>
+   </property>
+  </action>
+  <action name="actionSascadeSubWindows">
+   <property name="text">
+    <string>重叠排列</string>
+   </property>
+   <property name="toolTip">
+    <string>重叠排列</string>
+   </property>
+  </action>
+  <action name="actionTileSubWindows">
+   <property name="text">
+    <string>整齐排列</string>
+   </property>
+   <property name="toolTip">
+    <string>整齐排列</string>
    </property>
   </action>
  </widget>

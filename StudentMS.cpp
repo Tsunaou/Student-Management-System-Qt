@@ -38,14 +38,29 @@ int StudentMS::getActiveTalbeIndex()
     return i;
 }
 
+void StudentMS::closeEvent(QCloseEvent *event)
+{
+    //自定义关闭事件，询问是否关闭
+    foreach(QMdiSubWindow *window, ui->mdiArea->subWindowList()){
+        if(window->isActiveWindow()){
+            int i = this->WindMap.find(window).value();
+            subWnds[i]->closeEvent(event);
+        }
+    }
+}
+
 void StudentMS::on_actionNew_triggered()
 {
-    StuSubWindow *newWnd = new StuSubWindow();
-    subWnds.push_back(newWnd);
+    StuSubWindow *newWnd = new StuSubWindow();    subWnds.push_back(newWnd);
 
     QMdiSubWindow *child = ui->mdiArea->addSubWindow(newWnd);
     tableIndex++;
     WindMap.insert(child,tableIndex);
+
+
+    //坑爹，这两个的名字不一样
+    newWnd->resize(700,700);
+    newWnd->setWindowTitle(tr("学生信息表%1").arg(tableIndex+1));
 
     child->setWindowTitle(tr("学生信息表%1").arg(tableIndex+1));
     child->resize(700,700);
@@ -123,12 +138,24 @@ void StudentMS::on_actionSortName_triggered()
 
 void StudentMS::on_actionClose_triggered()
 {
-
+    int activeIndex = this->getActiveTalbeIndex();
+    if(activeIndex == -1){
+        QMessageBox::warning(this,tr("提示"),
+                 tr("您当前未创建(或打开)文件，请先创建一个文件。"));
+        return;
+    }
+    subWnds[activeIndex]->close();
 }
 
 void StudentMS::on_actionSave_triggered()
 {
-
+    int activeIndex = this->getActiveTalbeIndex();
+    if(activeIndex == -1){
+        QMessageBox::warning(this,tr("提示"),
+                 tr("您当前未创建(或打开)文件，请先创建一个文件。"));
+        return;
+    }
+    subWnds[activeIndex]->saveFile();
 }
 
 void StudentMS::on_actionOpen_triggered()
@@ -166,10 +193,33 @@ void StudentMS::on_actionOpen_triggered()
                QFileInfo fi = QFileInfo(fileName);
                QStringList sections = fi.fileName().split(QRegExp("[.]")); //分割birthday
                this->ui->mdiArea->activeSubWindow()->setWindowTitle(sections.at(0));
+               subWnds[activeIndex]->setWindowTitle(fi.fileName());
                subWnds[activeIndex]->importFile(fileName);
 
            }
            file.close();
        }
     }
+}
+
+
+
+void StudentMS::on_actionTabBar_triggered()
+{
+    ui->mdiArea->setViewMode(QMdiArea::TabbedView); //设置视口模式：tabBar模式
+}
+
+void StudentMS::on_actionWindow_triggered()
+{
+    ui->mdiArea->setViewMode(QMdiArea::SubWindowView); //设置视口模式：tabBar模式
+}
+
+void StudentMS::on_actionSascadeSubWindows_triggered()
+{
+    ui->mdiArea-> cascadeSubWindows();
+}
+
+void StudentMS::on_actionTileSubWindows_triggered()
+{
+    ui->mdiArea->tileSubWindows();
 }

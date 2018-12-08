@@ -9,6 +9,7 @@ StuSubWindow::StuSubWindow(QWidget *parent) :
     //成员变量初始化
     tb = ui->tableWidget;
     filePath = "";
+    flagModified = true;
 
     //对表格的一些特性进行处理
     tb->setSelectionBehavior(QAbstractItemView::SelectRows);    //整行选中的方式
@@ -71,6 +72,36 @@ void StuSubWindow::sortByName()
 
 void StuSubWindow::saveFile()
 {
+    //保存，是已经打开的，或者保存过的文件保存
+    if(filePath == ""){
+        this->saveFileAs();
+        QMessageBox::information(this,tr("新文件"),tr("新文件用另存为处理"));
+    }else{
+        //就把表格里的内容都存到filePath里就好
+        QFile file(filePath);
+        if(!file.open(QIODevice::WriteOnly | QIODevice::Text))
+        {
+            QMessageBox::warning(this,tr("警告"),tr("打开文件失败"));
+            return;
+        }
+        else
+        {
+            QTextStream textStream(&file);
+            for(int i=0; i <ui->tableWidget->rowCount(); i++)
+            {
+                for(int j=0; j<=5;j++){
+                    textStream << ui->tableWidget->item(i,j)->text()<<" ";
+                }
+                textStream<<endl;
+            }
+             QMessageBox::information(this,tr("提示"),tr("保存成功"));
+            file.close();
+        }
+    }
+}
+
+void StuSubWindow::saveFileAs()
+{
 
 }
 
@@ -79,7 +110,8 @@ void StuSubWindow::importFile(QString fileName)
     this->filePath = fileName;
     QFileInfo fi = QFileInfo(fileName);
     qDebug()<<fi.fileName()<<endl;
-    this->setWindowTitle(fi.fileName());
+    this->windowTitleChanged(fi.fileName());
+//    this->setWindowTitle(fi.fileName());
     QFile file(fileName);
     if(!file.open(QIODevice::ReadOnly | QIODevice::Text))
     {
@@ -125,6 +157,25 @@ StuInfoTemplate StuSubWindow::getTableForRow(int row)
                            tb->item(row,5)->text());//住址
 }
 
+void StuSubWindow::closeEvent(QCloseEvent *event)
+{
+    QMessageBox::StandardButton button;
+    QString name = this->windowTitle();
+    button=QMessageBox::question(this,tr("退出程序"),QString(name+tr("尚未保存，是否保存")),QMessageBox::Yes|QMessageBox::No|QMessageBox::Cancel);
+    if(button==QMessageBox::No)
+    {
+        event->ignore(); // 忽略退出信号，程序继续进行
+    }
+    else if(button==QMessageBox::Yes)
+    {
+        event->accept(); // 接受退出信号，程序退出
+    }
+    else if(button==QMessageBox::Cancel)
+    {
+        event->ignore(); // 忽略退出信号，程序继续进行
+    }
+}
+
 void StuSubWindow::on_tableWidget_cellDoubleClicked(int row, int column)
 {
     StuInfoTemplate info = getTableForRow(row);
@@ -140,3 +191,4 @@ void StuSubWindow::on_tableWidget_cellDoubleClicked(int row, int column)
     }
 
 }
+
