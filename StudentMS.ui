@@ -31,31 +31,44 @@
    </property>
    <widget class="QMenu" name="menu">
     <property name="title">
-     <string>文件</string>
+     <string>文件(&amp;F)</string>
     </property>
     <addaction name="actionNew"/>
     <addaction name="actionOpen"/>
     <addaction name="actionClose"/>
+    <addaction name="actionSave"/>
+    <addaction name="actionSaveAs"/>
+    <addaction name="actionPrint"/>
    </widget>
    <widget class="QMenu" name="menu_2">
     <property name="title">
-     <string>编辑</string>
+     <string>编辑(&amp;E)</string>
     </property>
+    <widget class="QMenu" name="menu_6">
+     <property name="title">
+      <string>排序</string>
+     </property>
+     <addaction name="actionSortID"/>
+     <addaction name="actionSortName"/>
+    </widget>
     <addaction name="actionAdd"/>
+    <addaction name="actionAlter"/>
+    <addaction name="actionDelete"/>
+    <addaction name="menu_6"/>
    </widget>
    <widget class="QMenu" name="menu_3">
     <property name="title">
-     <string>查看</string>
+     <string>查看(&amp;V)</string>
     </property>
    </widget>
    <widget class="QMenu" name="menu_4">
     <property name="title">
-     <string>窗口</string>
+     <string>窗口(&amp;W)</string>
     </property>
    </widget>
    <widget class="QMenu" name="menu_5">
     <property name="title">
-     <string>帮助</string>
+     <string>帮助(&amp;H)</string>
     </property>
     <addaction name="actionAbout"/>
    </widget>
@@ -66,36 +79,96 @@
    <addaction name="menu_5"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
+   <property name="iconSize">
+    <size>
+     <width>25</width>
+     <height>25</height>
+    </size>
+   </property>
+   <property name="toolButtonStyle">
+    <enum>Qt::ToolButtonTextBesideIcon</enum>
+   </property>
    <attribute name="toolBarArea">
     <enum>TopToolBarArea</enum>
    </attribute>
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
+   <addaction name="actionNew"/>
+   <addaction name="actionOpen"/>
+   <addaction name="actionSave"/>
+   <addaction name="actionPrint"/>
+   <addaction name="actionAbout"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
+  <widget class="QToolBar" name="toolBar">
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>25</width>
+     <height>25</height>
+    </size>
+   </property>
+   <property name="toolButtonStyle">
+    <enum>Qt::ToolButtonTextUnderIcon</enum>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>LeftToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="actionAdd"/>
+   <addaction name="actionAlter"/>
+   <addaction name="actionDelete"/>
+   <addaction name="actionSortID"/>
+  </widget>
   <action name="actionNew">
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/icon/icon/new.png</normaloff>:/icon/icon/new.png</iconset>
+   </property>
    <property name="text">
-    <string>新建</string>
+    <string>新建(&amp;N)</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+N</string>
    </property>
   </action>
   <action name="actionOpen">
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/icon/icon/open.png</normaloff>:/icon/icon/open.png</iconset>
+   </property>
    <property name="text">
-    <string>打开</string>
+    <string>打开(&amp;O)</string>
    </property>
    <property name="toolTip">
     <string>打开</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+O</string>
+   </property>
   </action>
   <action name="actionClose">
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/icon/icon/close.png</normaloff>:/icon/icon/close.png</iconset>
+   </property>
    <property name="text">
-    <string>关闭</string>
+    <string>关闭(&amp;C)</string>
    </property>
    <property name="toolTip">
     <string>关闭</string>
    </property>
   </action>
   <action name="actionAdd">
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/icon/icon/add.png</normaloff>:/icon/icon/add.png</iconset>
+   </property>
    <property name="text">
     <string>增加</string>
    </property>
@@ -104,6 +177,10 @@
    </property>
   </action>
   <action name="actionAbout">
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/icon/icon/about.png</normaloff>:/icon/icon/about.png</iconset>
+   </property>
    <property name="text">
     <string>关于</string>
    </property>
@@ -111,8 +188,103 @@
     <string>关于</string>
    </property>
   </action>
+  <action name="actionSave">
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/icon/icon/save.png</normaloff>:/icon/icon/save.png</iconset>
+   </property>
+   <property name="text">
+    <string>保存(&amp;S)</string>
+   </property>
+   <property name="toolTip">
+    <string>保存</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+S</string>
+   </property>
+  </action>
+  <action name="actionAlter">
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/icon/icon/alert.png</normaloff>:/icon/icon/alert.png</iconset>
+   </property>
+   <property name="text">
+    <string>修改</string>
+   </property>
+   <property name="toolTip">
+    <string>修改</string>
+   </property>
+  </action>
+  <action name="actionDelete">
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/icon/icon/delete.png</normaloff>:/icon/icon/delete.png</iconset>
+   </property>
+   <property name="text">
+    <string>删除</string>
+   </property>
+   <property name="toolTip">
+    <string>删除</string>
+   </property>
+   <property name="shortcut">
+    <string>Del</string>
+   </property>
+  </action>
+  <action name="actionSortID">
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/icon/icon/sort.png</normaloff>:/icon/icon/sort.png</iconset>
+   </property>
+   <property name="text">
+    <string>排序</string>
+   </property>
+   <property name="toolTip">
+    <string>按学号排序</string>
+   </property>
+  </action>
+  <action name="actionSortName">
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/icon/icon/sort.png</normaloff>:/icon/icon/sort.png</iconset>
+   </property>
+   <property name="text">
+    <string>按姓名排序</string>
+   </property>
+   <property name="toolTip">
+    <string>按姓名排序</string>
+   </property>
+  </action>
+  <action name="actionPrint">
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/icon/icon/print.png</normaloff>:/icon/icon/print.png</iconset>
+   </property>
+   <property name="text">
+    <string>打印(&amp;P)</string>
+   </property>
+   <property name="toolTip">
+    <string>打印</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+P</string>
+   </property>
+  </action>
+  <action name="actionSaveAs">
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/icon/icon/saveAs.png</normaloff>:/icon/icon/saveAs.png</iconset>
+   </property>
+   <property name="text">
+    <string>另存为(&amp;A)</string>
+   </property>
+   <property name="toolTip">
+    <string>另存为</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources/>
+ <resources>
+  <include location="resource.qrc"/>
+ </resources>
  <connections/>
 </ui>

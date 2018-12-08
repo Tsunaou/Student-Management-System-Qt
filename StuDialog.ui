@@ -100,7 +100,21 @@
      <widget class="QComboBox" name="SexBox"/>
     </item>
    </layout>
+   <zorder>StuID</zorder>
+   <zorder>StuName</zorder>
+   <zorder>StuSex</zorder>
+   <zorder>StuBirth</zorder>
+   <zorder>StuAdd</zorder>
+   <zorder>StuHome</zorder>
+   <zorder>HomeEdit</zorder>
+   <zorder>AddEdit</zorder>
+   <zorder>NameEdit</zorder>
+   <zorder>BirthEdit</zorder>
+   <zorder>SexBox</zorder>
+   <zorder>IDEdit</zorder>
   </widget>
+  <zorder>verticalLayoutWidget</zorder>
+  <zorder>buttonBox</zorder>
  </widget>
  <resources/>
  <connections>

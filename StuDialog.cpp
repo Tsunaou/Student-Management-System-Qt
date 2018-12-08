@@ -10,6 +10,14 @@ StuDialog::StuDialog(QWidget *parent) :
     connect(ui->buttonBox, &QDialogButtonBox::rejected, this, [=](){ qDebug("cancel"); });
     ui->SexBox->addItem("男");
     ui->SexBox->addItem("女");
+
+
+    QWidget::setTabOrder(ui->IDEdit, ui->NameEdit);
+    QWidget::setTabOrder(ui->NameEdit, ui->SexBox);
+    QWidget::setTabOrder(ui->SexBox, ui->BirthEdit);
+    QWidget::setTabOrder(ui->BirthEdit, ui->HomeEdit);
+    QWidget::setTabOrder(ui->HomeEdit, ui->AddEdit);
+    QWidget::setTabOrder(ui->AddEdit, ui->buttonBox);
 }
 
 StuDialog::~StuDialog()
