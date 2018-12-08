@@ -12,4 +12,9 @@
         <file>icon/close.png</file>
         <file>icon/saveAs.png</file>
     </qresource>
+    <qresource prefix="/qss">
+        <file>stylesheet/black.qss</file>
+        <file>stylesheet/white.qss</file>
+        <file>stylesheet/studentMS.qss</file>
+    </qresource>
 </RCC>
