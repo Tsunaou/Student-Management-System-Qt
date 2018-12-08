@@ -101,6 +101,7 @@
    <addaction name="actionNew"/>
    <addaction name="actionOpen"/>
    <addaction name="actionSave"/>
+   <addaction name="actionSaveAs"/>
    <addaction name="actionPrint"/>
    <addaction name="actionAbout"/>
   </widget>
@@ -127,7 +128,7 @@
    <addaction name="actionAdd"/>
    <addaction name="actionAlter"/>
    <addaction name="actionDelete"/>
-   <addaction name="actionSortID"/>
+   <addaction name="actionSort"/>
   </widget>
   <action name="actionNew">
    <property name="icon">
@@ -243,7 +244,7 @@
      <normaloff>:/icon/icon/sort.png</normaloff>:/icon/icon/sort.png</iconset>
    </property>
    <property name="text">
-    <string>排序</string>
+    <string>按学号排序</string>
    </property>
    <property name="toolTip">
     <string>按学号排序</string>
@@ -318,6 +319,18 @@
    </property>
    <property name="toolTip">
     <string>整齐排列</string>
+   </property>
+  </action>
+  <action name="actionSort">
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/icon/icon/sort.png</normaloff>:/icon/icon/sort.png</iconset>
+   </property>
+   <property name="text">
+    <string>排序</string>
+   </property>
+   <property name="toolTip">
+    <string>排序</string>
    </property>
   </action>
  </widget>

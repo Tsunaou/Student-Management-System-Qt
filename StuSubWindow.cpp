@@ -9,8 +9,7 @@ StuSubWindow::StuSubWindow(QWidget *parent) :
     //成员变量初始化
     this->tb = ui->tableWidget; //指向窗口中的表格
     this->filePath = "";        //文件路径
-    this->fileTitle = "";       //文件名
-    this->flagModified = true;  //是否被修改过了
+    this->flagModified = false;  //是否被修改过了
 
     //对表格的一些特性进行处理
     tb->setSelectionBehavior(QAbstractItemView::SelectRows);    //整行选中的方式
@@ -20,6 +19,11 @@ StuSubWindow::StuSubWindow(QWidget *parent) :
     //绑定双击事件的信号到处理函数（双击即可改变值）
     connect(tb,SIGNAL(on_tableWidget_cellDoubleClicked(int,int)),this,SLOT(on_tableWidget_cellDoubleClicked(int,int)));
 
+    //实现点击标题即可排序
+    QHeaderView *headerGoods = tb->horizontalHeader();
+    headerGoods->setSortIndicator(0, Qt::AscendingOrder);
+    headerGoods->setSortIndicatorShown(true);
+    connect(headerGoods, SIGNAL(sectionClicked(int)), tb, SLOT (sortByColumn(int)));
 }
 
 StuSubWindow::~StuSubWindow()
@@ -32,6 +36,8 @@ void StuSubWindow::addLine()
     StuDialog *dialog = new StuDialog();
     if(dialog->exec() == QDialog::Accepted)
     {
+        this->flagModified = true;  //文件被修改了，关闭时需要保存
+
         QVector<QString> res = dialog->getInput();
         int row_count = tb->rowCount(); //获取表单行数
          tb->insertRow(row_count); //插入新行
@@ -51,55 +57,67 @@ void StuSubWindow::alterLine()
 
 void StuSubWindow::deleteLine()
 {
+    this->flagModified = true;  //文件被修改了，关闭时需要保存
     int rowCur = tb->currentRow();
     tb->removeRow(rowCur);
 }
 
 void StuSubWindow::sortByID()
 {
+    this->flagModified = true;  //文件被修改了，关闭时需要保存
     tb->sortItems(0);
 }
 
 void StuSubWindow::sortByName()
 {
+    this->flagModified = true;  //文件被修改了，关闭时需要保存
     tb->sortItems(1);
 }
 
-void StuSubWindow::saveFile()
+void StuSubWindow::sortByUser(int col, bool Ascend)
 {
-    //保存，是已经打开的，或者保存过的文件保存
-    if(filePath == ""){
-        this->saveFileAs();
-        //QMessageBox::information(this,tr("新文件"),tr("新文件用另存为处理"));
+    if(Ascend){
+        this->tb->sortItems(col,Qt::AscendingOrder);
+
     }else{
-        //就把表格里的内容都存到filePath里就好
-        this->saveTableTo(filePath);
+        this->tb->sortItems(col,Qt::DescendingOrder);
     }
 }
 
-void StuSubWindow::saveFileAs()
+bool StuSubWindow::saveFile()
+{
+    //保存，是已经打开的，或者保存过的文件保存
+    if(filePath == ""){
+        return this->saveFileAs();
+    }else{
+        //就把表格里的内容都存到filePath里就好
+        return this->saveTableTo(filePath);
+    }
+}
+
+bool StuSubWindow::saveFileAs()
 {
     QFileDialog fileDialog;
     QString fileName = fileDialog.getSaveFileName(this,tr("Open File"),"/新表格",tr("Text File(*.txt)"));
 
     if(fileName == ""){
-        return;
+        return false;
     }
     else{
         QString simpleName = this->getFileNameWithoutFormat(fileName);
         this->setWindowTitle(simpleName);   //“另存为”成功后，将窗口改名
         this->filePath = fileName;
-        this->saveTableTo(fileName);
+        return this->saveTableTo(fileName);
     }
 }
 
-void StuSubWindow::saveTableTo(QString filepath)
+bool StuSubWindow::saveTableTo(QString filepath)
 {
     QFile file(filepath);
     if(!file.open(QIODevice::WriteOnly | QIODevice::Text))
     {
         QMessageBox::warning(this,tr("警告"),tr("打开文件失败"));
-        return;
+        return false;
     }
     else
     {
@@ -112,7 +130,9 @@ void StuSubWindow::saveTableTo(QString filepath)
             textStream<<endl;
         }
         QMessageBox::information(this,tr("提示"),tr("保存成功"));
+        this->flagModified = false;
         file.close();
+        return true;
     }
 }
 
@@ -122,7 +142,6 @@ void StuSubWindow::importFile(QString fileName)
     QFileInfo fi = QFileInfo(fileName);
     qDebug()<<fi.fileName()<<endl;
     this->windowTitleChanged(fi.fileName());
-//    this->setWindowTitle(fi.fileName());
     QFile file(fileName);
     if(!file.open(QIODevice::ReadOnly | QIODevice::Text))
     {
@@ -178,21 +197,32 @@ QString StuSubWindow::getFileNameWithoutFormat(QString filename)
 
 void StuSubWindow::closeEvent(QCloseEvent *event)
 {
-    QMessageBox::StandardButton button;
-    QString name = this->windowTitle();
-    button=QMessageBox::question(this,tr("退出程序"),QString(name+tr("尚未保存，是否保存")),QMessageBox::Yes|QMessageBox::No|QMessageBox::Cancel);
-    if(button==QMessageBox::No)
+    if(this->flagModified) //文件被修改过了，不能随便关掉
     {
-        event->ignore(); // 忽略退出信号，程序继续进行
+        QMessageBox::StandardButton button;
+        QString name = this->windowTitle();
+        button=QMessageBox::question(this,tr("退出程序"),QString(name+tr("尚未保存，是否保存")),QMessageBox::Yes|QMessageBox::No|QMessageBox::Cancel);
+        if(button==QMessageBox::No)
+        {
+            event->accept(); // 不保存，当前窗口直接关闭
+        }
+        else if(button==QMessageBox::Yes)
+        {
+            if(this->saveFile()){// 成功保存
+                event->accept(); // 接受退出信号，程序退出
+            }else{
+                event->ignore(); // 忽略退出信号，程序继续进行
+            }
+        }
+        else if(button==QMessageBox::Cancel)
+        {
+            event->ignore(); // 忽略退出信号，程序继续进行
+        }
     }
-    else if(button==QMessageBox::Yes)
-    {
-        event->accept(); // 接受退出信号，程序退出
+    else{
+        event->accept();
     }
-    else if(button==QMessageBox::Cancel)
-    {
-        event->ignore(); // 忽略退出信号，程序继续进行
-    }
+
 }
 
 void StuSubWindow::on_tableWidget_cellDoubleClicked(int row, int column)
@@ -203,6 +233,8 @@ void StuSubWindow::on_tableWidget_cellDoubleClicked(int row, int column)
     dialog->setByStuInfo(info);
     if(dialog->exec() == QDialog::Accepted)
     {
+        this->flagModified = true;  //文件被修改了，关闭时需要保存
+
         QVector<QString> res = dialog->getInput();
         for(int i=0;i<=5;i++){
            tb->item(row,i)->setText(res[i]);

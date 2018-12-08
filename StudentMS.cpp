@@ -58,11 +58,9 @@ void StudentMS::on_actionNew_triggered()
     WindMap.insert(child,tableIndex);
 
 
-    //坑爹，这两个的名字不一样
+    //显示的是newWnd的名字，因此只要设置newWnd的名字就好
     newWnd->resize(700,700);
     newWnd->setWindowTitle(tr("学生信息表%1").arg(tableIndex+1));
-
-    child->setWindowTitle(tr("学生信息表%1").arg(tableIndex+1));
     child->resize(700,700);
     child->show();
 }
@@ -82,8 +80,8 @@ void StudentMS::on_actionAbout_triggered()
 {
     QMessageBox::about(this, tr("关于 StudentMS"),
             tr("<p>"
-               "<b>StudentMS</b>是是一个管理程序，是南京大学计算机科学与技术系《高级程序设计》课程的大作业"
-               "该程序使用C++和Qt框架开发，可以对学生的信息管理<br/>"
+               "<b>StudentMS</b>是是一个学生信息管理程序，是南京大学计算机科学与技术系《高级程序设计》课程的大作业"
+               "该程序使用C++和Qt框架开发，可以实现了学生信息表的创建、保存、打开等功能。<br/>"
                "程序还处于迭代中，欢迎使用。<br/>"
                "有任何疑问可以发送邮件<a href=\"mailto:895254752@qq.com\">895254752@qq.com</a><br/>"
 //               "更多详情，可以到我的github pages上查看<a href=\"https://tsunaou.github.io/GraphicsYoung.html\" target=\"_blank\"><b>Tsuna的个人主页</b></a>"
@@ -237,3 +235,13 @@ void StudentMS::on_actionTileSubWindows_triggered()
     ui->mdiArea->tileSubWindows();
 }
 
+void StudentMS::on_actionSort_triggered()
+{
+    int activeIndex = this->getActiveTalbeIndex();
+    if(activeIndex == -1){
+        QMessageBox::warning(this,tr("提示"),
+                 tr("您当前未创建(或打开)文件，请先创建一个文件。"));
+        return;
+    }
+    subWnds[activeIndex]->sortByUser(0,true);
+}

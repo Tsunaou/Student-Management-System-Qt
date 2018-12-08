@@ -34,6 +34,7 @@ private slots:
     void on_actionNew_triggered();      //新建窗口
     void on_actionClose_triggered();    //关闭当前窗口
     void on_actionSave_triggered();     //保存当前窗口内容
+    void on_actionSaveAs_triggered();
     void on_actionOpen_triggered();     //打开一条记录
 
     //编辑
@@ -42,6 +43,8 @@ private slots:
     void on_actionDelete_triggered();   //删除一条记录
     void on_actionSortID_triggered();   //按照ID排序
     void on_actionSortName_triggered(); //按照姓名排序
+    void on_actionSort_triggered();     //广义上的排序
+
 
     //窗口
     void on_actionTabBar_triggered();
@@ -53,7 +56,6 @@ private slots:
     void on_actionAbout_triggered();    //相关信息
 
 
-    void on_actionSaveAs_triggered();
 
 private:
     Ui::StudentMS *ui;
