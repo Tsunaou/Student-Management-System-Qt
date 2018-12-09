@@ -6,7 +6,7 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 //    StyleSelector::setStyle(":/qss/stylesheet/studentMS.qss");
-    StyleSelector::setStyle("H:/Advanced Cpp Programming/StudentMS_Qt/stylesheet/studentMS.qss");
+    StyleSelector::setStyle("H:/Advanced Cpp Programming/StudentMS_Qt/stylesheet/studentMS.css");
 
     StudentMS w;
     w.show();

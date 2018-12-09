@@ -1,67 +1,8 @@
-/*
-* The MIT License (MIT)
-*
-* Copyright : http://blog.csdn.net/liang19890820
-*
-* Author : 一去丶二三里
-*
-* Date : 2016/07/22
-*
-* Description : 白色靓丽
-*
-*/
-
-/**********提示**********/
-QToolTip{
-		border: 1px solid rgb(111, 156, 207);
-		background: white;
-		color: rgb(51, 51, 51);
-}
-
-/**********菜单栏**********/
-QMenuBar {
-        background: rgb(187, 212, 238);
-        border: 1px solid rgb(111, 156, 207);
-}
-QMenuBar::item {
-        background: transparent;
-}
-QMenuBar::item:enabled {
-        color: rgb(2, 65, 132);
-}
-QMenuBar::item:!enabled {
-        color: rgb(155, 155, 155);
-}
-QMenuBar::item:enabled:selected {
-        border-top-color: rgb(111, 156, 207);
-        border-bottom-color: rgb(111, 156, 207);
-        background: rgb(198, 224, 252);
-}
-
-/**********菜单**********/
-QMenu {
-        border: 1px solid rgb(111, 156, 207);
-        background: rgb(232, 241, 250);
-}
-
-QMenu::item:enabled {
-        color: rgb(84, 84, 84);
-}
-QMenu::item:!enabled {
-        color: rgb(155, 155, 155);
-}
-QMenu::item:enabled:selected {
-        color: rgb(2, 65, 132);
-        background: rgba(255, 255, 255, 200);
-}
-QMenu::separator {
-        background: rgb(111, 156, 207);
-}
 
 /**********页签项**********/
 QTabWidget::pane {
 		border: none;
-		border-top: 3px solid rgb(0, 78, 161);
+		border-top: 3px solid rgb(26, 115, 204);
 		background: rgb(187, 212, 238);
 }
 QTabWidget::tab-bar {
@@ -80,11 +21,11 @@ QTabBar::tab {
 		padding-right: 5px;
 }
 QTabBar::tab:hover {
-		background: rgb(0, 78, 161);
+		background: rgb(26, 115, 204);
 }
 QTabBar::tab:selected {
 		color: white;
-		background: rgb(0, 78, 161);
+		background: rgb(26, 115, 204);
 }
 
 QTabWidget#tabWidget::pane {
@@ -100,147 +41,25 @@ QTabBar#tabBar::tab {
         background: transparent;
 }
 QTabBar#tabBar::tab:hover {
-        color: rgb(2, 65, 132);
+        color: rgb(26, 115, 204);
 }
 QTabBar#tabBar::tab:selected {
-        color: rgb(2, 65, 132);
+        color: rgb(26, 115, 204);
         background: rgb(232, 241, 252);
 }
 
-/**********表头**********/
-QHeaderView{
-        border-bottom: 3px solid rgb(0, 78, 161);
-        background: transparent;
-        min-height: 30px;
-}
-QHeaderView::section:horizontal {
-        color: rgb(2, 65, 132);
-        background: transparent;
-        padding-left: 5px;
-}
-QHeaderView::section:horizontal:hover {
-        color: white;
-        background: rgb(0, 78, 161);
-}
-QHeaderView::section:horizontal:pressed {
-        color: white;
-        background: rgb(6, 94, 187);
-}
-QHeaderView::up-arrow {
-        width: 13px;
-        height: 11px;
-        padding-right: 5px;
-        subcontrol-position: center right;
-}
 
-QHeaderView::down-arrow {
-        width: 13px;
-        height: 11px;
-        padding-right: 5px;
-        subcontrol-position: center right;
+/**********分组框**********/
+QGroupBox {
+		font-size: 15px;
+		border: 1px solid rgb(111, 156, 207);
+		border-radius: 4px;
+		margin-top: 10px;
 }
-
-
-/**********表格**********/
-QTableView {
-        border: 1px solid rgb(111, 156, 207);
-        background: rgb(224, 238, 255);
-        gridline-color: rgb(111, 156, 207);
-}
-QTableView::item {
-        padding-left: 5px;
-        padding-right: 5px;
-        background: white;
-        border-right: 1px solid rgb(111, 156, 207);
-        border-bottom: 1px solid rgb(111, 156, 207);
-}
-QTableView::item:selected {
-        background: rgba(255, 255, 255, 100);
-}
-QTableView::item:selected:!active {
-        color: rgb(65, 65, 65);
-}
-QTableView::indicator {
-        width: 20px;
-        height: 20px;
-}
-
-/**********滚动条-水平**********/
-QScrollBar:horizontal {
-        height: 20px;
-        background: transparent;
-        margin-top: 3px;
-        margin-bottom: 3px;
-}
-QScrollBar::handle:horizontal {
-        height: 20px;
-        min-width: 30px;
-        background: rgb(170, 200, 230);
-        margin-left: 15px;
-        margin-right: 15px;
-}
-QScrollBar::handle:horizontal:hover {
-        background: rgb(165, 195, 225);
-}
-QScrollBar::sub-line:horizontal {
-        width: 15px;
-        background: transparent;
-        subcontrol-position: left;
-}
-QScrollBar::add-line:horizontal {
-        width: 15px;
-        background: transparent;
-        subcontrol-position: right;
-}
-QScrollBar::sub-line:horizontal:hover {
-        background: rgb(170, 200, 230);
-}
-QScrollBar::add-line:horizontal:hover {
-        background: rgb(170, 200, 230);
-}
-QScrollBar::add-page:horizontal,QScrollBar::sub-page:horizontal {
-        background: transparent;
-}
-
-/**********滚动条-垂直**********/
-QScrollBar:vertical {
-        width: 20px;
-        background: transparent;
-        margin-left: 3px;
-        margin-right: 3px;
-}
-QScrollBar::handle:vertical {
-        width: 20px;
-        min-height: 30px;
-        background: rgb(170, 200, 230);
-        margin-top: 15px;
-        margin-bottom: 15px;
-}
-QScrollBar::handle:vertical:hover {
-        background: rgb(165, 195, 225);
-}
-QScrollBar::sub-line:vertical {
-        height: 15px;
-        background: transparent;
-        subcontrol-position: top;
-}
-QScrollBar::add-line:vertical {
-        height: 15px;
-        background: transparent;
-        subcontrol-position: bottom;
-}
-QScrollBar::sub-line:vertical:hover {
-        background: rgb(170, 200, 230);
-}
-QScrollBar::add-line:vertical:hover {
-        background: rgb(170, 200, 230);
-}
-QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
-        background: transparent;
-}
-
-QScrollBar#verticalScrollBar:vertical {
-        margin-top: 30px;
+QGroupBox::title {
+		color: rgb(56, 99, 154);
+		top: -12px;
+		left: 10px;
 }
 
 /**********下拉列表**********/
@@ -267,8 +86,7 @@ QComboBox::drop-down {
 QComboBox::drop-down:hover {
         background: rgba(255, 255, 255, 30);
 }
-QComboBox::down-arrow {
-}
+
 QComboBox::down-arrow:on {
         /**top: 1px;**/
 }
@@ -331,7 +149,6 @@ QCheckBox::indicator {
         height: 20px;
 }
 
-
 /**********单选框**********/
 QRadioButton{
         spacing: 5px;
@@ -352,7 +169,6 @@ QRadioButton::indicator {
         width: 20px;
         height: 20px;
 }
-
 
 /**********输入框**********/
 QLineEdit {
@@ -619,7 +435,6 @@ QPushButton#minimizeButton {
 		background: rgb(120, 170, 220);
 }
 
-
 QPushButton#maximizeButton[maximizeProperty="maximize"] {
 		border-radius: none;
 		border-bottom-left-radius: 4px;
@@ -633,7 +448,6 @@ QPushButton#maximizeButton[maximizeProperty="restore"] {
 		border-bottom-right-radius: 4px;
 		background: rgb(120, 170, 220);
 }
-
 
 QPushButton#closeButton {
 		border-radius: none;
@@ -697,12 +511,10 @@ QPushButton#openButton {
 		border-radius: none;
 		background: transparent;
 }
-
 QPushButton#deleteButton {
 		border-radius: none;
 		background: transparent;
 }
-
 
 QPushButton#menuButton {
 		text-align: left center;

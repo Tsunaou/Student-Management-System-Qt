@@ -52,14 +52,20 @@ void StuSubWindow::addLine()
 void StuSubWindow::alterLine()
 {
     int rowCur = tb->currentRow();
-    on_tableWidget_cellDoubleClicked(rowCur,0);
+    qDebug()<<"修改的行号是："<<rowCur<<endl;
+    if(rowCur>=0){
+        on_tableWidget_cellDoubleClicked(rowCur,0);
+    }
 }
 
 void StuSubWindow::deleteLine()
 {
     this->flagModified = true;  //文件被修改了，关闭时需要保存
     int rowCur = tb->currentRow();
-    tb->removeRow(rowCur);
+    qDebug()<<"删除的行号是："<<rowCur<<endl;
+    if(rowCur>=0){
+        tb->removeRow(rowCur);
+    }
 }
 
 void StuSubWindow::sortByID()
