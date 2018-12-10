@@ -337,7 +337,7 @@
   <action name="actionFilter">
    <property name="icon">
     <iconset resource="resource.qrc">
-     <normaloff>:/icon/icon/filter.png</normaloff>:/icon/icon/filter.png</iconset>
+     <normaloff>:/icon/icon/search .png</normaloff>:/icon/icon/search .png</iconset>
    </property>
    <property name="text">
     <string>筛选</string>

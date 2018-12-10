@@ -9,6 +9,8 @@
 #include <QMessageBox>
 #include <QFileDialog>
 #include <QCloseEvent>
+#include <QLabel>
+#include <QTimer>
 
 #include "StuSubWindow.h"
 #include "StuDialog.h"
@@ -27,6 +29,7 @@ public:
     ~StudentMS();
     int getActiveTalbeIndex();
     void showLoginBox();
+    void timeUpdate();
 
 protected:
      void closeEvent(QCloseEvent *event);
@@ -46,6 +49,7 @@ private slots:
     void on_actionSortID_triggered();   //按照ID排序
     void on_actionSortName_triggered(); //按照姓名排序
     void on_actionSort_triggered();     //广义上的排序
+    void on_actionFilter_triggered();   //筛选表格数据
 
 
     //窗口
@@ -60,12 +64,14 @@ private slots:
 
 
 
+
 private:
     Ui::StudentMS *ui;
     QVector<StuSubWindow*> subWnds;
     QMap<QMdiSubWindow*,int> WindMap;   //存储当前活动的窗口
     QMap<QString,int> OpenMap;          //存储当前打开的文件(后期扩展可以防止打开同一个窗口)
     int tableIndex;
+    QLabel* currentTimeLabel;
 
 };
 

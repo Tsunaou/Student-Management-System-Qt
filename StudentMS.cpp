@@ -20,6 +20,16 @@ StudentMS::StudentMS(QWidget *parent) :
 
     this->tableIndex = -1;
 
+    //状态栏（但是显示不出来）
+    currentTimeLabel = new QLabel;
+    ui->statusBar->addWidget(currentTimeLabel);
+    currentTimeLabel->show();
+    ui->statusBar->show();
+    QTimer *timer = new QTimer(this);
+    timer->start(1000); //每隔1000ms发送timeout的信号
+    connect(timer, SIGNAL(timeout()),this,SLOT(timeUpdate()));
+
+
 }
 
 StudentMS::~StudentMS()
@@ -112,6 +122,13 @@ void StudentMS::showLoginBox()
         }
     }
 
+}
+
+void StudentMS::timeUpdate()
+{
+    QDateTime current_time = QDateTime::currentDateTime();
+    QString timestr = current_time.toString( "yyyy年MM月dd日 hh:mm:ss"); //设置显示的格式
+    currentTimeLabel->setText(timestr); //设置label的文本内容为时间
 }
 
 void StudentMS::on_actionAlter_triggered()
@@ -297,4 +314,15 @@ void StudentMS::on_actionSort_triggered()
         return;
     }
     subWnds[activeIndex]->sortByUser(0,true);
+}
+
+void StudentMS::on_actionFilter_triggered()
+{
+    int activeIndex = this->getActiveTalbeIndex();
+    if(activeIndex == -1){
+        QMessageBox::warning(this,tr("提示"),
+                 tr("您当前未创建(或打开)文件，请先创建一个文件。"));
+        return;
+    }
+    subWnds[activeIndex]->filter();
 }

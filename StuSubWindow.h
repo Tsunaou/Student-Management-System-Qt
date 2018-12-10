@@ -35,6 +35,7 @@ public:
     void importFile(QString fileName);      //导入文件内容
     void closeEvent(QCloseEvent *event);    //捕捉关闭事件
     void sortByUser(int col,bool Ascend);   //自定义排序
+    void filter();                          //自定义筛选
     //数据辅助处理函数
     StuInfoTemplate getTableForRow(int row);    //得到表格某一行的数据
     QString getFileNameWithoutFormat(QString filename); //得到某个路径下的文件名（不含格式）

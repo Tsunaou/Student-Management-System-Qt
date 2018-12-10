@@ -97,6 +97,27 @@ void StuSubWindow::sortByUser(int col, bool Ascend)
     }
 }
 
+void StuSubWindow::filter()
+{
+    QMessageBox::warning(this,tr("提示"),
+             tr("筛选了一哈"));
+    QString text = "096";
+    QList <QTableWidgetItem *> item = tb->findItems(text, Qt::MatchContains);
+
+    for (int i = 0; i < tb->rowCount(); i++)
+    {
+        tb->setRowHidden(i, true);//隐藏所有行
+    }
+
+    if (!item.isEmpty())//不为空
+    {
+        for (int i = 0; i < item.count(); i++)
+        {
+            tb->setRowHidden(item.at(i)->row(),false);//item.at(i).row()输出行号
+        }
+    }
+}
+
 bool StuSubWindow::saveFile()
 {
     //保存，是已经打开的，或者保存过的文件保存
