@@ -12,7 +12,6 @@ StudentMS::StudentMS(QWidget *parent) :
     ui->setupUi(this);
     setWindowTitle(tr("学生信息管理系统"));
 
-
     ui->mdiArea->setViewMode(QMdiArea::TabbedView); //设置视口模式：tabBar模式
     ui->mdiArea->setTabPosition(QTabWidget::North); //设置tabBar的位置
     ui->mdiArea->setTabShape(QTabWidget::Rounded); //设置tab形状
@@ -87,7 +86,32 @@ void StudentMS::on_actionAbout_triggered()
 //               "更多详情，可以到我的github pages上查看<a href=\"https://tsunaou.github.io/GraphicsYoung.html\" target=\"_blank\"><b>Tsuna的个人主页</b></a>"
                "<hr/>"
                "<p style=\"text-align: right\">欧阳鸿荣 2018.12</p></p>"
-              ));
+               ));
+}
+
+void StudentMS::showLoginBox()
+{
+    LoginDialog *login = new LoginDialog();
+    while(true){
+        if(login->exec() == QDialog::Accepted){
+            if(login->getUSER()!=USERNAME || login->getPWD()!=PASSWORD){
+                QMessageBox::warning(this,tr("提示"),
+                         tr("请输入正确的用户名或密码"));
+                continue;
+            }else{
+                QMessageBox::information(this,tr("登陆成功"),
+                         tr("登陆成功，欢迎你"));
+                return;
+            }
+        }else if(login->exec() == QDialog::Rejected){
+            this->close();
+            return;
+        }else{
+            this->close();
+            return;
+        }
+    }
+
 }
 
 void StudentMS::on_actionAlter_triggered()
@@ -176,6 +200,19 @@ void StudentMS::on_actionOpen_triggered()
 
     QString fileName;
     fileName = QFileDialog::getOpenFileName(this,tr("打开文件"),QDir::currentPath(),tr("Text File (*.txt)"));
+
+    //检验该路径的文件是否已经被打开过了,如果是，则将当前活动窗口切换给他
+    foreach(QMdiSubWindow *window, ui->mdiArea->subWindowList()){
+        if(window->isActiveWindow()){
+            int i = this->WindMap.find(window).value();
+            if(subWnds[i]->getFilePath() == fileName){
+                //当前活动窗口中有当前路径的
+                ui->mdiArea->setActiveSubWindow(window);
+                return;
+            }
+        }
+    }
+
 
     if(fileName == ""){//如果用户直接关闭了文件浏览对话框，那么文件名就为空值，直接返回
         return;

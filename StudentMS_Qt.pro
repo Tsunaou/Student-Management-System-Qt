@@ -30,7 +30,9 @@ SOURCES += \
     StuDialog.cpp \
     StuSubWindow.cpp \
     StuInfoTemplate.cpp \
-    StyleSelector.cpp
+    StyleSelector.cpp \
+    SortDialog.cpp \
+    LoginDialog.cpp
 
 HEADERS += \
         StudentMS.h \
@@ -38,12 +40,16 @@ HEADERS += \
     StuSubWindow.h \
     StuInfoTemplate.h \
     StyleSelector.h \
-    config.h
+    config.h \
+    SortDialog.h \
+    LoginDialog.h
 
 FORMS += \
         StudentMS.ui \
     StuDialog.ui \
-    StuSubWindow.ui
+    StuSubWindow.ui \
+    SortDialog.ui \
+    LoginDialog.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

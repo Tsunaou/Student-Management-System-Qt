@@ -11,6 +11,11 @@ StuDialog::StuDialog(QWidget *parent) :
     ui->SexBox->addItem("男");
     ui->SexBox->addItem("女");
 
+    ui->IDEdit->setPlaceholderText("请输入学生的学号（值唯一）");
+    ui->NameEdit->setPlaceholderText("请输入学生的姓名");
+    ui->HomeEdit->setPlaceholderText("请输入学生的籍贯");
+    ui->AddEdit->setPlaceholderText("请输入学生的住址");
+
 
     QWidget::setTabOrder(ui->IDEdit, ui->NameEdit);
     QWidget::setTabOrder(ui->NameEdit, ui->SexBox);

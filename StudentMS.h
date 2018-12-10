@@ -12,6 +12,7 @@
 
 #include "StuSubWindow.h"
 #include "StuDialog.h"
+#include "LoginDialog.h"
 
 namespace Ui {
 class StudentMS;
@@ -25,6 +26,7 @@ public:
     explicit StudentMS(QWidget *parent = nullptr);
     ~StudentMS();
     int getActiveTalbeIndex();
+    void showLoginBox();
 
 protected:
      void closeEvent(QCloseEvent *event);
@@ -54,6 +56,7 @@ private slots:
 
     //相关
     void on_actionAbout_triggered();    //相关信息
+
 
 
 

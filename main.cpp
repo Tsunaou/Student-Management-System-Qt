@@ -10,6 +10,7 @@ int main(int argc, char *argv[])
 
     StudentMS w;
     w.show();
+    w.showLoginBox();
 
     return a.exec();
 }

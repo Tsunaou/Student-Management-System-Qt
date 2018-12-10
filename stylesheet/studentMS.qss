@@ -249,6 +249,23 @@ QLineEdit:!enabled {
         color: rgb(80, 80, 80);
 }
 
+/**********日期输入******/
+QDateEdit {
+        border-radius: 4px;
+        height: 25px;
+        border: 1px solid rgb(111, 156, 207);
+        background: white;
+}
+QDateEdit:enabled {
+        color: rgb(84, 84, 84);
+}
+QDateEdit:enabled:hover, QLineEdit:enabled:focus {
+        color: rgb(51, 51, 51);
+}
+QDateEdit:!enabled {
+        color: rgb(80, 80, 80);
+}
+
 /**********文本编辑框**********/
 QTextEdit {
         border: 1px solid rgb(111, 156, 207);

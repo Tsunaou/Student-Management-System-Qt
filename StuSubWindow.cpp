@@ -1,5 +1,6 @@
 ﻿#include "StuSubWindow.h"
 #include "ui_StuSubWindow.h"
+#include <QTextCodec>
 
 StuSubWindow::StuSubWindow(QWidget *parent) :
     QWidget(parent),
@@ -39,13 +40,19 @@ void StuSubWindow::addLine()
         this->flagModified = true;  //文件被修改了，关闭时需要保存
 
         QVector<QString> res = dialog->getInput();
+        //ID相同，不可重复添加
+        QString ID = res[0];
+        if(this->primaryKeyConfilct(ID)){
+            return;
+        }
+        //ID不存在，可以添加
         int row_count = tb->rowCount(); //获取表单行数
-         tb->insertRow(row_count); //插入新行
-         for(int i=0;i<=5;i++){
-             QTableWidgetItem *newItem = new QTableWidgetItem();
-             newItem->setText(res[i]);
-             tb->setItem(row_count,i,newItem);
-         }
+        tb->insertRow(row_count); //插入新行
+        for(int i=0;i<=5;i++){
+            QTableWidgetItem *newItem = new QTableWidgetItem();
+            newItem->setText(res[i]);
+            tb->setItem(row_count,i,newItem);
+        }
     }
 }
 
@@ -112,7 +119,7 @@ bool StuSubWindow::saveFileAs()
     else{
         QString simpleName = this->getFileNameWithoutFormat(fileName);
         this->setWindowTitle(simpleName);   //“另存为”成功后，将窗口改名
-        this->filePath = fileName;
+//        this->filePath = fileName;        //另存为不应该保存当前的属性
         return this->saveTableTo(fileName);
     }
 }
@@ -128,6 +135,7 @@ bool StuSubWindow::saveTableTo(QString filepath)
     else
     {
         QTextStream textStream(&file);
+        textStream.setCodec("UTF-8");
         textStream << FILE_KEY << endl;
         for(int i=0; i <ui->tableWidget->rowCount(); i++)
         {
@@ -165,6 +173,7 @@ void StuSubWindow::importFile(QString fileName)
         {
             //该文件可以成功打开，于是将信息导入到
             QTextStream textStream(&file);
+            textStream.setCodec("UTF-8");
             QString lineInfo;
             lineInfo = textStream.readLine();
 
@@ -189,7 +198,6 @@ void StuSubWindow::importFile(QString fileName)
         }
         file.close();
     }
-
 }
 
 StuInfoTemplate StuSubWindow::getTableForRow(int row)
@@ -208,6 +216,18 @@ QString StuSubWindow::getFileNameWithoutFormat(QString filename)
     QStringList simpleName = fi.fileName().split(QRegExp("[.]"));
     return simpleName.at(0);
 
+}
+
+bool StuSubWindow::primaryKeyConfilct(QString ID)
+{
+    int curRow = tb->rowCount();
+    for(int i=0;i<curRow;i++){
+        if(tb->item(i,0)->text() == ID){
+            QMessageBox::warning(this,tr("错误"),tr("该学号的学生已经存在，不可重复添加！"));
+            return true; //主键chongtu
+        }
+    }
+    return false;
 }
 
 void StuSubWindow::closeEvent(QCloseEvent *event)
@@ -249,11 +269,21 @@ void StuSubWindow::on_tableWidget_cellDoubleClicked(int row, int column)
     if(dialog->exec() == QDialog::Accepted)
     {
         this->flagModified = true;  //文件被修改了，关闭时需要保存
-
         QVector<QString> res = dialog->getInput();
+        //ID相同，不可重复添加
+        QString ID = res[0];
+        if(this->primaryKeyConfilct(ID)){
+            return;
+        }
+        //ID不存在，可以添加
         for(int i=0;i<=5;i++){
            tb->item(row,i)->setText(res[i]);
         }
     }
+}
+
+QString StuSubWindow::getFilePath() const
+{
+    return filePath;
 }
 

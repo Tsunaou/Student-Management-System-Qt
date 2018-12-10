@@ -11,6 +11,8 @@
         <file>icon/about.png</file>
         <file>icon/close.png</file>
         <file>icon/saveAs.png</file>
+        <file>icon/soft.png</file>
+        <file>icon/softSmall.png</file>
     </qresource>
     <qresource prefix="/qss">
         <file>stylesheet/black.qss</file>
