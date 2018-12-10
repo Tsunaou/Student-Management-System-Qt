@@ -171,7 +171,9 @@ void StudentMS::on_actionSaveAs_triggered()
 
 void StudentMS::on_actionOpen_triggered()
 {
-    //open：得到文件路径，文件名，以这个文件名创建窗口，然后导入文件内容
+    //打开文件
+    //得到文件路径和文件名，在检验合法性后以这个文件名创建窗口，然后导入文件内容
+
     QString fileName;
     fileName = QFileDialog::getOpenFileName(this,tr("打开文件"),QDir::currentPath(),tr("Text File (*.txt)"));
 
@@ -194,13 +196,27 @@ void StudentMS::on_actionOpen_triggered()
            else
            {
                //该文件可以成功打开
+
+               //文件标识，系统只能打开特定格式文件（防止出错）
+               QTextStream textStream(&file);
+               QString lineInfo;
+               lineInfo = textStream.readLine();
+               if(lineInfo != FILE_KEY){
+                   QMessageBox::warning(this,tr("错误"),tr("该文件不兼容于该系统"));
+                   file.close();
+                   return;
+               }
+
+               //是目标对象的文件,可以创建新窗口然后导入
                this->on_actionNew_triggered();
                int activeIndex = this->getActiveTalbeIndex();
                if(activeIndex == -1){
+                   //理论上不会运行到这里
                    QMessageBox::warning(this,tr("提示"),
                             tr("您当前未创建(或打开)文件，请先创建一个文件。"));
                    return;
                }
+
                QFileInfo fi = QFileInfo(fileName);
                QStringList sections = fi.fileName().split(QRegExp("[.]")); //分割birthday
                this->ui->mdiArea->activeSubWindow()->setWindowTitle(sections.at(0));

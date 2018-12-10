@@ -10,6 +10,7 @@
 #include <QCloseEvent>
 
 #include "StuDialog.h"
+#include "config.h"
 
 namespace Ui {
 class StuSubWindow;

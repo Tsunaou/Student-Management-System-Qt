@@ -37,7 +37,8 @@ HEADERS += \
     StuDialog.h \
     StuSubWindow.h \
     StuInfoTemplate.h \
-    StyleSelector.h
+    StyleSelector.h \
+    config.h
 
 FORMS += \
         StudentMS.ui \

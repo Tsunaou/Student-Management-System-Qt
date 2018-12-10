@@ -128,6 +128,7 @@ bool StuSubWindow::saveTableTo(QString filepath)
     else
     {
         QTextStream textStream(&file);
+        textStream << FILE_KEY << endl;
         for(int i=0; i <ui->tableWidget->rowCount(); i++)
         {
             for(int j=0; j<=5;j++){
@@ -165,6 +166,14 @@ void StuSubWindow::importFile(QString fileName)
             //该文件可以成功打开，于是将信息导入到
             QTextStream textStream(&file);
             QString lineInfo;
+            lineInfo = textStream.readLine();
+
+            //文件标识，系统只能打开特定格式文件
+            if(lineInfo != FILE_KEY){
+                QMessageBox::warning(this,tr("错误"),tr("该文件不兼容于该系统"));
+                this->close();
+                return;
+            }
             while(!textStream.atEnd())
             {
                 lineInfo = textStream.readLine();
