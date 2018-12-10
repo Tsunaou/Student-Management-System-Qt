@@ -119,7 +119,9 @@ bool StuSubWindow::saveFileAs()
     else{
         QString simpleName = this->getFileNameWithoutFormat(fileName);
         this->setWindowTitle(simpleName);   //“另存为”成功后，将窗口改名
-//        this->filePath = fileName;        //另存为不应该保存当前的属性
+        if(this->filePath == ""){
+            this->filePath = fileName;        //初次保存
+        }
         return this->saveTableTo(fileName);
     }
 }

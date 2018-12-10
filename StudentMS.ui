@@ -129,6 +129,7 @@
    <addaction name="actionAlter"/>
    <addaction name="actionDelete"/>
    <addaction name="actionSort"/>
+   <addaction name="actionFilter"/>
   </widget>
   <action name="actionNew">
    <property name="icon">
@@ -331,6 +332,18 @@
    </property>
    <property name="toolTip">
     <string>排序</string>
+   </property>
+  </action>
+  <action name="actionFilter">
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/icon/icon/filter.png</normaloff>:/icon/icon/filter.png</iconset>
+   </property>
+   <property name="text">
+    <string>筛选</string>
+   </property>
+   <property name="toolTip">
+    <string>Filter</string>
    </property>
   </action>
  </widget>

@@ -83,7 +83,7 @@ void StudentMS::on_actionAbout_triggered()
                "该程序使用C++和Qt框架开发，可以实现了学生信息表的创建、保存、打开等功能。<br/>"
                "程序还处于迭代中，欢迎使用。<br/>"
                "有任何疑问可以发送邮件<a href=\"mailto:895254752@qq.com\">895254752@qq.com</a><br/>"
-//               "更多详情，可以到我的github pages上查看<a href=\"https://tsunaou.github.io/GraphicsYoung.html\" target=\"_blank\"><b>Tsuna的个人主页</b></a>"
+               "更多详情，可以到我的github pages上查看<a href=\"https://tsunaou.github.io/StudentMS.html\" target=\"_blank\"><b>Tsuna的学生管理系统</b></a>"
                "<hr/>"
                "<p style=\"text-align: right\">欧阳鸿荣 2018.12</p></p>"
                ));

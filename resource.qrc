@@ -13,6 +13,8 @@
         <file>icon/saveAs.png</file>
         <file>icon/soft.png</file>
         <file>icon/softSmall.png</file>
+        <file>icon/filter.png</file>
+        <file>icon/search .png</file>
     </qresource>
     <qresource prefix="/qss">
         <file>stylesheet/black.qss</file>
