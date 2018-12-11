@@ -103,7 +103,7 @@ void StudentMS::on_actionAbout_triggered()
                ));
 }
 
-void StudentMS::showLoginBox()
+bool StudentMS::showLoginBox()
 {
     LoginDialog *login = new LoginDialog();
     while(true){
@@ -115,14 +115,12 @@ void StudentMS::showLoginBox()
             }else{
                 QMessageBox::information(this,tr("登陆成功"),
                          tr("登陆成功，欢迎你"));
-                return;
+                return true;
             }
         }else if(login->exec() == QDialog::Rejected){
-            this->close();
-            return;
+            return false;
         }else{
-            this->close();
-            return;
+            return false;
         }
     }
 

@@ -10,7 +10,12 @@ int main(int argc, char *argv[])
 
     StudentMS w;
     w.show();
-    w.showLoginBox();
+    if(w.showLoginBox() == false){
+        w.close();
+        a.closeAllWindows();
+        return 0;
+    }
+
 
     return a.exec();
 }

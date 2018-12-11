@@ -29,7 +29,7 @@ public:
     explicit StudentMS(QWidget *parent = nullptr);
     ~StudentMS();
     int getActiveTalbeIndex();
-    void showLoginBox();
+    bool showLoginBox();
     void timeUpdate();
 
 protected:
@@ -66,12 +66,9 @@ private slots:
     //相关
     void on_actionAbout_triggered();    //相关信息
 
-
-
+    //皮肤
     void on_actionPrint_triggered();
-
     void on_actionOriginQss_triggered();
-
     void on_actionQssBlue_triggered();
 
 private:
