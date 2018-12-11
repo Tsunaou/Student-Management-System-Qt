@@ -40,7 +40,7 @@ public:
     //数据辅助处理函数
     StuInfoTemplate getTableForRow(int row);    //得到表格某一行的数据
     QString getFileNameWithoutFormat(QString filename); //得到某个路径下的文件名（不含格式）
-    bool primaryKeyConfilct(QString ID);    //每个学生学号唯一（实际上就是主键），不可重复
+    bool primaryKeyConfilct(QString ID,int before);    //每个学生学号唯一（实际上就是主键），不可重复
     QString getFilePath() const;            //得到文件路径
     bool QString_Matches(const QString& str,const QString& pattern,const Qt::MatchFlags& flags);
 

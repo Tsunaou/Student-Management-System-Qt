@@ -44,7 +44,7 @@ void StuSubWindow::addLine()
         QVector<QString> res = dialog->getInput();
         //ID相同，不可重复添加
         QString ID = res[0];
-        if(this->primaryKeyConfilct(ID)){
+        if(this->primaryKeyConfilct(ID,-1)){
             return;
         }
         //ID不存在，可以添加
@@ -346,11 +346,11 @@ QString StuSubWindow::getFileNameWithoutFormat(QString filename)
 
 }
 
-bool StuSubWindow::primaryKeyConfilct(QString ID)
+bool StuSubWindow::primaryKeyConfilct(QString ID,int before)
 {
     int curRow = tb->rowCount();
     for(int i=0;i<curRow;i++){
-        if(tb->item(i,0)->text() == ID){
+        if(tb->item(i,0)->text() == ID && i!=before){
             QMessageBox::warning(this,tr("错误"),tr("该学号的学生已经存在，不可重复添加！"));
             return true; //主键chongtu
         }
@@ -400,7 +400,7 @@ void StuSubWindow::on_tableWidget_cellDoubleClicked(int row, int column)
         QVector<QString> res = dialog->getInput();
         //ID相同，不可重复添加
         QString ID = res[0];
-        if(this->primaryKeyConfilct(ID)){
+        if(this->primaryKeyConfilct(ID,row)){
             return;
         }
         //ID不存在，可以添加
