@@ -40,7 +40,23 @@
    </property>
    <layout class="QGridLayout" name="gridLayout">
     <item row="2" column="1">
-     <widget class="QComboBox" name="TypeBox"/>
+     <widget class="QComboBox" name="TypeBox">
+      <item>
+       <property name="text">
+        <string>部分匹配</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>前缀匹配</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>后缀匹配</string>
+       </property>
+      </item>
+     </widget>
     </item>
     <item row="1" column="0">
      <widget class="QLabel" name="label_4">
@@ -50,7 +66,43 @@
      </widget>
     </item>
     <item row="1" column="1">
-     <widget class="QComboBox" name="TargetBox"/>
+     <widget class="QComboBox" name="TargetBox">
+      <item>
+       <property name="text">
+        <string>全部</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>学号</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>姓名</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>性别</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>出生日期</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>籍贯</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>住址</string>
+       </property>
+      </item>
+     </widget>
     </item>
     <item row="0" column="0">
      <widget class="QLabel" name="label">
@@ -123,7 +175,7 @@
     <string notr="true">font: 9pt &quot;幼圆&quot;;</string>
    </property>
    <property name="text">
-    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;请输入您要查找的关键字&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;欢迎使用查找功能（默认条件时可显示全部）&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
   </widget>
  </widget>

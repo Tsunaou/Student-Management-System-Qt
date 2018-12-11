@@ -16,7 +16,11 @@ public:
     ~FilterDialog();
     QString getKey();
     QString getTarget();
+    int getTargetIndex();
     QString getType();
+    bool isRegex();
+    bool isWild();
+    bool isCaseSensitive();
 
 private:
     Ui::FilterDialog *ui;

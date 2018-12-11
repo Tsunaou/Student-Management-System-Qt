@@ -11,6 +11,8 @@ StuSubWindow::StuSubWindow(QWidget *parent) :
     this->tb = ui->tableWidget; //指向窗口中的表格
     this->filePath = "";        //文件路径
     this->flagModified = false;  //是否被修改过了
+    this->stuFilter = new FilterDialog();
+
 
     //对表格的一些特性进行处理
     tb->setSelectionBehavior(QAbstractItemView::SelectRows);    //整行选中的方式
@@ -106,19 +108,103 @@ void StuSubWindow::sortByUser(int col, bool Ascend)
    - Qt::MatchRegExp (overrides all flags above)使用正则表达式作为搜索项执行基于字符串的匹配。
    - Qt::MatchCaseSensitive：大小写敏感
 **/
+
+bool StuSubWindow:: QString_Matches(
+    const QString& str,
+    const QString& pattern,
+    const Qt::MatchFlags& flags)
+{
+    if(flags.testFlag(Qt::MatchRegExp) == true)
+    {
+        QRegularExpression::PatternOptions options = QRegularExpression::NoPatternOption;
+        if(flags.testFlag(Qt::MatchCaseSensitive) == false)
+        {
+            options = QRegularExpression::CaseInsensitiveOption;
+        }
+        QRegularExpression regex(pattern, options);
+        return regex.match(str).hasMatch();
+    }
+    else
+    {
+        Qt::CaseSensitivity cs = Qt::CaseSensitive;
+        if(flags.testFlag(Qt::MatchCaseSensitive) == false)
+        {
+            cs = Qt::CaseInsensitive;
+        }
+        if(flags.testFlag(Qt::MatchContains) == true)
+        {
+            return str.contains(pattern, cs);
+        }
+        else
+        {
+            if(flags.testFlag(Qt::MatchStartsWith) == true)
+            {
+                if(str.startsWith(pattern, cs) == true)
+                {
+                    return true;
+                }
+            }
+            if(flags.testFlag(Qt::MatchEndsWith) == true)
+            {
+                if(str.endsWith(pattern, cs) == true)
+                {
+                    return true;
+                }
+            }
+            if(flags.testFlag(Qt::MatchFixedString) == true)
+            {
+                return (str.compare(pattern, cs) == 0);
+            }
+        }
+    }
+    return false;
+};
+
 void StuSubWindow::filter()
 {
+    if(stuFilter->exec() == QDialog::Accepted){
 
+        //查找关键字
+        QString text = stuFilter->getKey();
 
-//    QMessageBox::warning(this,tr("提示"),
-//             tr("筛选了一哈"));
-    FilterDialog *filter = new FilterDialog();
-    if(filter->exec() == QDialog::Accepted){
-        QString text = filter->getKey();
+        //查找模式
         Qt::MatchFlags flag;
-        flag = Qt::MatchCaseSensitive;
-        flag |= Qt::MatchContains;
-        QList <QTableWidgetItem *> item = tb->findItems(text, flag);
+        QString pattenType = stuFilter->getType();
+        if(pattenType=="部分匹配"){
+            flag |= Qt::MatchContains;
+        }else if(pattenType == "前缀匹配"){
+            flag |= Qt::MatchStartsWith;
+        }else if(pattenType == "后缀匹配"){
+            flag |= Qt::MatchEndsWith;
+        }
+
+        //查找精度
+        if(stuFilter->isRegex()){
+            flag |= Qt::MatchRegExp;
+        }
+
+        if(stuFilter->isWild()){
+            flag |= Qt::MatchWildcard;
+        }
+
+        if(stuFilter->isCaseSensitive()){
+            flag |= Qt::MatchCaseSensitive;
+        }
+
+        //查找范围
+        QList <QTableWidgetItem *> item;
+        if(stuFilter->getTarget()=="全部"){
+            item = tb->findItems(text, flag);
+        }else{
+            int index = stuFilter->getTargetIndex()-1;
+            qDebug()<<"选中了"<<index<<endl;
+            for(int i=0;i<tb->rowCount();i++){
+                if(QString_Matches(tb->item(i,index)->text(),text,flag)){
+                    item.push_back(tb->item(i,index));
+                }
+            }
+        }
+
 
         for (int i = 0; i < tb->rowCount(); i++)
         {

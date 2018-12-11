@@ -42,6 +42,7 @@ public:
     QString getFileNameWithoutFormat(QString filename); //得到某个路径下的文件名（不含格式）
     bool primaryKeyConfilct(QString ID);    //每个学生学号唯一（实际上就是主键），不可重复
     QString getFilePath() const;            //得到文件路径
+    bool QString_Matches(const QString& str,const QString& pattern,const Qt::MatchFlags& flags);
 
 private slots:
     void on_tableWidget_cellDoubleClicked(int row, int column);    //双击事件
@@ -49,6 +50,7 @@ private slots:
 private:
     Ui::StuSubWindow *ui;
     QTableWidget* tb;       //当前窗口的表格
+    FilterDialog *stuFilter;   //当前的筛选器
     QString filePath;       //文件路径
     bool flagModified;      //是否被修改过
 };

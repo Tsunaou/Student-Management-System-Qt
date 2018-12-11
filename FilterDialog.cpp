@@ -26,7 +26,27 @@ QString FilterDialog::getTarget()
     return this->ui->TargetBox->currentText();
 }
 
+int FilterDialog::getTargetIndex()
+{
+    return this->ui->TargetBox->currentIndex();
+}
+
 QString FilterDialog::getType()
 {
     return this->ui->TypeBox->currentText();
+}
+
+bool FilterDialog::isRegex()
+{
+    return this->ui->RegxBox->checkState();
+}
+
+bool FilterDialog::isWild()
+{
+    return this->ui->WildBoix->checkState();
+}
+
+bool FilterDialog::isCaseSensitive()
+{
+    return this->ui->CaseBox->checkState();
 }
