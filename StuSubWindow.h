@@ -11,6 +11,7 @@
 
 #include "StuDialog.h"
 #include "config.h"
+#include "FilterDialog.h"
 
 namespace Ui {
 class StuSubWindow;

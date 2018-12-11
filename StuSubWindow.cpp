@@ -97,25 +97,44 @@ void StuSubWindow::sortByUser(int col, bool Ascend)
     }
 }
 
+
+/**
+   - Qt::MatchFixedString：执行基于字符串的匹配。（基于字符串的比较不区分大小写，除非MatchCaseSensitive：）
+   - Qt::MatchContains：搜索项包含在项中。
+   - Qt::MatchStartsWith：搜索项与项的开头匹配。
+   - Qt::MatchEndsWith：搜索项与项的结尾匹配。
+   - Qt::MatchRegExp (overrides all flags above)使用正则表达式作为搜索项执行基于字符串的匹配。
+   - Qt::MatchCaseSensitive：大小写敏感
+**/
 void StuSubWindow::filter()
 {
-    QMessageBox::warning(this,tr("提示"),
-             tr("筛选了一哈"));
-    QString text = "096";
-    QList <QTableWidgetItem *> item = tb->findItems(text, Qt::MatchContains);
 
-    for (int i = 0; i < tb->rowCount(); i++)
-    {
-        tb->setRowHidden(i, true);//隐藏所有行
-    }
 
-    if (!item.isEmpty())//不为空
-    {
-        for (int i = 0; i < item.count(); i++)
+//    QMessageBox::warning(this,tr("提示"),
+//             tr("筛选了一哈"));
+    FilterDialog *filter = new FilterDialog();
+    if(filter->exec() == QDialog::Accepted){
+        QString text = filter->getKey();
+        Qt::MatchFlags flag;
+        flag = Qt::MatchCaseSensitive;
+        flag |= Qt::MatchContains;
+        QList <QTableWidgetItem *> item = tb->findItems(text, flag);
+
+        for (int i = 0; i < tb->rowCount(); i++)
         {
-            tb->setRowHidden(item.at(i)->row(),false);//item.at(i).row()输出行号
+            tb->setRowHidden(i, true);//隐藏所有行
+        }
+
+        if (!item.isEmpty())//不为空
+        {
+            for (int i = 0; i < item.count(); i++)
+            {
+                tb->setRowHidden(item.at(i)->row(),false);//item.at(i).row()输出行号
+            }
         }
     }
+
+
 }
 
 bool StuSubWindow::saveFile()

@@ -51,6 +51,10 @@ private slots:
     void on_actionSort_triggered();     //广义上的排序
     void on_actionFilter_triggered();   //筛选表格数据
 
+    //查看
+    void on_actionToolbar_toggled(bool arg1);
+    void on_actionStatus_toggled(bool arg1);
+
 
     //窗口
     void on_actionTabBar_triggered();
@@ -62,12 +66,6 @@ private slots:
     void on_actionAbout_triggered();    //相关信息
 
 
-
-
-
-    void on_actionToolbar_toggled(bool arg1);
-
-    void on_actionStatus_toggled(bool arg1);
 
 private:
     Ui::StudentMS *ui;
