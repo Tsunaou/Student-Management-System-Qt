@@ -29,6 +29,10 @@ StudentMS::StudentMS(QWidget *parent) :
     timer->start(1000); //每隔1000ms发送timeout的信号
     connect(timer, SIGNAL(timeout()),this,SLOT(timeUpdate()));
 
+    //工具栏和状态栏
+    this->ui->actionToolbar->setChecked(true);
+    this->ui->actionStatus->setChecked(true);
+
 
 }
 
@@ -325,4 +329,24 @@ void StudentMS::on_actionFilter_triggered()
         return;
     }
     subWnds[activeIndex]->filter();
+}
+
+void StudentMS::on_actionToolbar_toggled(bool arg1)
+{
+    if(arg1){
+        this->ui->toolBar->show();
+        this->ui->mainToolBar->show();
+    }else{
+        this->ui->toolBar->hide();
+        this->ui->mainToolBar->hide();
+    }
+}
+
+void StudentMS::on_actionStatus_toggled(bool arg1)
+{
+    if(arg1){
+        this->ui->statusBar->show();
+    }else{
+        this->ui->statusBar->hide();
+    }
 }

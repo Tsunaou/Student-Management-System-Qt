@@ -60,6 +60,8 @@
     <property name="title">
      <string>查看(&amp;V)</string>
     </property>
+    <addaction name="actionToolbar"/>
+    <addaction name="actionStatus"/>
    </widget>
    <widget class="QMenu" name="menu_4">
     <property name="title">
@@ -344,6 +346,28 @@
    </property>
    <property name="toolTip">
     <string>Filter</string>
+   </property>
+  </action>
+  <action name="actionToolbar">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>显示工具栏</string>
+   </property>
+   <property name="toolTip">
+    <string>显示工具栏</string>
+   </property>
+  </action>
+  <action name="actionStatus">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>显示状态栏</string>
+   </property>
+   <property name="toolTip">
+    <string>显示状态栏</string>
    </property>
   </action>
  </widget>

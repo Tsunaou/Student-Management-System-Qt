@@ -65,6 +65,10 @@ private slots:
 
 
 
+    void on_actionToolbar_toggled(bool arg1);
+
+    void on_actionStatus_toggled(bool arg1);
+
 private:
     Ui::StudentMS *ui;
     QVector<StuSubWindow*> subWnds;
