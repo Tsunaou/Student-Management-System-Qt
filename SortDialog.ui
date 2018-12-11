@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>398</width>
+    <height>166</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,7 +17,7 @@
    <property name="geometry">
     <rect>
      <x>30</x>
-     <y>240</y>
+     <y>120</y>
      <width>341</width>
      <height>32</height>
     </rect>
@@ -29,52 +29,70 @@
     <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
    </property>
   </widget>
-  <widget class="QWidget" name="gridLayoutWidget">
+  <widget class="QWidget" name="horizontalLayoutWidget">
    <property name="geometry">
     <rect>
      <x>30</x>
-     <y>30</y>
-     <width>331</width>
-     <height>171</height>
+     <y>40</y>
+     <width>341</width>
+     <height>51</height>
     </rect>
    </property>
-   <layout class="QGridLayout" name="gridLayout_5">
-    <item row="0" column="0">
-     <layout class="QGridLayout" name="gridLayout_6">
-      <item row="0" column="0">
-       <widget class="QLabel" name="label_21">
-        <property name="text">
-         <string>优先级1：</string>
-        </property>
-       </widget>
+   <layout class="QHBoxLayout" name="horizontalLayout_5">
+    <item>
+     <widget class="QLabel" name="label_21">
+      <property name="text">
+       <string>排序的对象</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QComboBox" name="sortTarget">
+      <item>
+       <property name="text">
+        <string>学号</string>
+       </property>
       </item>
-      <item row="1" column="0">
-       <widget class="QLabel" name="label_22">
-        <property name="text">
-         <string>优先级2：</string>
-        </property>
-       </widget>
+      <item>
+       <property name="text">
+        <string>姓名</string>
+       </property>
       </item>
-      <item row="0" column="1">
-       <widget class="QComboBox" name="comboBox"/>
+      <item>
+       <property name="text">
+        <string>性别</string>
+       </property>
       </item>
-      <item row="0" column="2">
-       <widget class="QComboBox" name="comboBox_3"/>
+      <item>
+       <property name="text">
+        <string>出生日期</string>
+       </property>
       </item>
-      <item row="1" column="1">
-       <widget class="QComboBox" name="comboBox_2"/>
+      <item>
+       <property name="text">
+        <string>籍贯</string>
+       </property>
       </item>
-      <item row="1" column="2">
-       <widget class="QComboBox" name="comboBox_4"/>
+      <item>
+       <property name="text">
+        <string>住址</string>
+       </property>
       </item>
-      <item row="2" column="0">
-       <widget class="QLabel" name="label_23">
-        <property name="text">
-         <string>TextLabel</string>
-        </property>
-       </widget>
+     </widget>
+    </item>
+    <item>
+     <widget class="QComboBox" name="sortOrder">
+      <item>
+       <property name="text">
+        <string>升序</string>
+       </property>
       </item>
-     </layout>
+      <item>
+       <property name="text">
+        <string>降序</string>
+       </property>
+      </item>
+     </widget>
     </item>
    </layout>
   </widget>

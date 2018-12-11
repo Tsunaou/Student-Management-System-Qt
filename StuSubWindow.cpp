@@ -1,6 +1,5 @@
 ﻿#include "StuSubWindow.h"
 #include "ui_StuSubWindow.h"
-#include <QTextCodec>
 
 StuSubWindow::StuSubWindow(QWidget *parent) :
     QWidget(parent),
@@ -12,7 +11,8 @@ StuSubWindow::StuSubWindow(QWidget *parent) :
     this->filePath = "";        //文件路径
     this->flagModified = false;  //是否被修改过了
     this->stuFilter = new FilterDialog();
-
+    this->stuSorter = new SortDialog();
+//    this->printer = new QPrinter();
 
     //对表格的一些特性进行处理
     tb->setSelectionBehavior(QAbstractItemView::SelectRows);    //整行选中的方式
@@ -89,13 +89,14 @@ void StuSubWindow::sortByName()
     tb->sortItems(1);
 }
 
-void StuSubWindow::sortByUser(int col, bool Ascend)
+void StuSubWindow::sortByUser()
 {
-    if(Ascend){
-        this->tb->sortItems(col,Qt::AscendingOrder);
-
-    }else{
-        this->tb->sortItems(col,Qt::DescendingOrder);
+    if(stuSorter->exec()==QDialog::Accepted){
+        int col =stuSorter->getSortTarget();
+        switch (stuSorter->getSortOrder()) {
+            case 0:this->tb->sortItems(col,Qt::AscendingOrder);break;
+            case 1:this->tb->sortItems(col,Qt::DescendingOrder); break;
+        }
     }
 }
 
@@ -220,6 +221,20 @@ void StuSubWindow::filter()
         }
     }
 
+
+}
+
+void StuSubWindow::printTable()
+{
+//    QPrintDialog dialog(this->printer, this);
+//    if(dialog.exec() == QDialog::Rejected) return;
+//    //printPreviewAction();
+//    QPixmap pixmap(ui->tableWidget->size());
+//    ui->tableWidget->render(&pixmap);
+//    QPainter painter;
+//    painter.begin(printer);
+//    painter.drawPixmap(QRectF(0, 0, pixmap.width(), pixmap.height()), pixmap, QRectF(0, 0,pixmap.width(), pixmap.height()));
+//    painter.end();
 
 }
 

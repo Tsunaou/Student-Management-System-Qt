@@ -67,6 +67,8 @@ private slots:
 
 
 
+    void on_actionPrint_triggered();
+
 private:
     Ui::StudentMS *ui;
     QVector<StuSubWindow*> subWnds;

@@ -1,4 +1,4 @@
-#ifndef SORTDIALOG_H
+﻿#ifndef SORTDIALOG_H
 #define SORTDIALOG_H
 
 #include <QDialog>
@@ -14,6 +14,8 @@ class SortDialog : public QDialog
 public:
     explicit SortDialog(QWidget *parent = nullptr);
     ~SortDialog();
+    int getSortTarget();
+    int getSortOrder();
 
 private:
     Ui::SortDialog *ui;

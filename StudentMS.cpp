@@ -317,7 +317,7 @@ void StudentMS::on_actionSort_triggered()
                  tr("您当前未创建(或打开)文件，请先创建一个文件。"));
         return;
     }
-    subWnds[activeIndex]->sortByUser(0,true);
+    subWnds[activeIndex]->sortByUser();
 }
 
 void StudentMS::on_actionFilter_triggered()
@@ -349,4 +349,15 @@ void StudentMS::on_actionStatus_toggled(bool arg1)
     }else{
         this->ui->statusBar->hide();
     }
+}
+
+void StudentMS::on_actionPrint_triggered()
+{
+    int activeIndex = this->getActiveTalbeIndex();
+    if(activeIndex == -1){
+        QMessageBox::warning(this,tr("提示"),
+                 tr("您当前未创建(或打开)文件，请先创建一个文件。"));
+        return;
+    }
+    subWnds[activeIndex]->printTable();
 }
