@@ -361,3 +361,13 @@ void StudentMS::on_actionPrint_triggered()
     }
     subWnds[activeIndex]->printTable();
 }
+
+void StudentMS::on_actionOriginQss_triggered()
+{
+    StyleSelector::setStyle(":/qss/stylesheet/none.qss");
+}
+
+void StudentMS::on_actionQssBlue_triggered()
+{
+    StyleSelector::setStyle(":/qss/stylesheet/studentMS.qss");
+}

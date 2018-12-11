@@ -13,8 +13,8 @@ LoginDialog::LoginDialog(QWidget *parent) :
     connect(ui->buttonBox, &QDialogButtonBox::accepted, this, [=](){ qDebug("ok or save");}); //绑定
     connect(ui->buttonBox, &QDialogButtonBox::rejected, this, [=](){ qDebug("cancel"); });
     //Test阶段
-    ui->PwdEdit->setText(PASSWORD);
-    ui->UserEdit->setText(USERNAME);
+//    ui->PwdEdit->setText(PASSWORD);
+//    ui->UserEdit->setText(USERNAME);
 }
 
 LoginDialog::~LoginDialog()

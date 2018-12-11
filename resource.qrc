@@ -20,5 +20,6 @@
         <file>stylesheet/black.qss</file>
         <file>stylesheet/white.qss</file>
         <file>stylesheet/studentMS.qss</file>
+        <file>stylesheet/none.qss</file>
     </qresource>
 </RCC>

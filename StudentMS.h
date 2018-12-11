@@ -15,6 +15,7 @@
 #include "StuSubWindow.h"
 #include "StuDialog.h"
 #include "LoginDialog.h"
+#include "StyleSelector.h"
 
 namespace Ui {
 class StudentMS;
@@ -68,6 +69,10 @@ private slots:
 
 
     void on_actionPrint_triggered();
+
+    void on_actionOriginQss_triggered();
+
+    void on_actionQssBlue_triggered();
 
 private:
     Ui::StudentMS *ui;
