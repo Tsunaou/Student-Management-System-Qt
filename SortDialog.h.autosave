@@ -7,6 +7,7 @@ namespace Ui {
 class SortDialog;
 }
 
+//用户排序的对话框
 class SortDialog : public QDialog
 {
     Q_OBJECT

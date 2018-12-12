@@ -22,6 +22,7 @@ namespace Ui {
 class StuSubWindow;
 }
 
+//子窗口，维护一张表格
 class StuSubWindow : public QWidget
 {
     Q_OBJECT
@@ -40,8 +41,8 @@ public:
     bool saveTableTo(QString filepath);     //将文件保存到filepath上
     void importFile(QString fileName);      //导入文件内容
     void closeEvent(QCloseEvent *event);    //捕捉关闭事件
-    void sortByUser();   //自定义排序
-    void filter();                          //自定义筛选
+    void sortByUser();  //自定义排序
+    void filter();      //自定义筛选
     void printTable();  //打印表格
     //数据辅助处理函数
     StuInfoTemplate getTableForRow(int row);    //得到表格某一行的数据
