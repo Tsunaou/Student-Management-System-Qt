@@ -29,7 +29,7 @@
 
 ### 3.扩展功能
 
-- 管理员登陆功能
+- 管理员登陆功能**(账号：Ouyang 密码：161220096)**
 - 任意排序功能
 - 多条件筛选功能
 - 基于QSS的界面设计
@@ -221,37 +221,33 @@ StuDialog、SortDialog、LoginDialog、 FilterDialog 本质上都只是获取信
 #### 1.打开StudentMS.exe，展示欢迎界面，并要求管理员登陆
 
 <div>
-    <img src="image/3.1.png"/>
+    <img src="gif/login.gif"/>
 </div>
+
 
 #### 2.登陆成功后，点击“新建”或快捷键“Ctrl+N”，即可新建表格
 
 <div>
-    <img src="image/3.2.png"/>
+    <img src="gif/new.gif"/>
 </div>
+
 
 ## <div STYLE="page-break-after: always;"></div>
 
 #### 3.点击“增加”或者使用快捷键“Ctrl+A”即可增加一个表项
 
-<div>
-    <img src="image/3.3.png"/>
-    <img src="image/3.4.png"/>
-</div>
+若修改或者增加时学号重复，则会阻止该项操作（将学号设为了主键，不可重复，也符合实际情况）
 
-## <div STYLE="page-break-after: always;"></div>
+<div>
+    <img src="gif/add.gif"/>
+</div>
 
 #### 4.点击“修改”或者使用双击表项即可修改一个表项
 
 <div>
-    <img src="image/3.5.png"/>
+    <img src="gif/alter.gif"/>
 </div>
 
-若修改或者增加时学号重复，则会阻止该项操作（将学号设为了主键，不可重复，也符合实际情况）
-
-<div>
-    <img src="image/3.6.png"/>
-</div>
 
 ## <div STYLE="page-break-after: always;"></div>
 
@@ -262,8 +258,9 @@ StuDialog、SortDialog、LoginDialog、 FilterDialog 本质上都只是获取信
 #### 6.点击“打开”则可打开一个文件
 
 <div>
-    <img src="image/3.7.png"/>
+    <img src="gif/open.gif"/>
 </div>
+
 
 该文件的内容如下：（这里使用了文件标识符，旨在打开固定格式（由本系统创建）的文件，防止系统崩溃）
 
@@ -273,71 +270,33 @@ StuDialog、SortDialog、LoginDialog、 FilterDialog 本质上都只是获取信
 
 ## <div STYLE="page-break-after: always;"></div>
 
-可以看到文件导入成功并正常显示在窗口里。
-
-<div>
-    <img src="image/3.8.png"/>
-</div>
 
 #### 7.点击“编辑-排序-按姓名排序/按学号排序”则可对当前的窗口排序
 
-##### (1) 按学号排序
+##### (1) 系统要求的排序
 
-<div>
-    <img src="image/3.10.png"/>
-</div>
+- 按学号排序
+- 按姓名排序
 
-## <div STYLE="page-break-after: always;"></div>
 
-##### (2) 按姓名排序
+##### (2) 自定义排序
 
-<div>
-    <img src="image/3.11.png"/>
-</div>
+- 点击表头，点击即可对该项排序。并且可以通过重复点击制定升序降序
 
-##### (3) 自定义排序
+- 点击“排序”，通过对话框选择排序方式
 
-这里有两种自定义排序方法
-
-方法一：点击表头，点击即可对该项排序。并且可以通过重复点击制定升序降序
-
-<div>
-    <img src="image/3.12.png"/>
-</div>
-
-## <div STYLE="page-break-after: always;"></div>
-
-方法二：点击“排序”，通过对话框选择排序方式
-
-<div>
-    <img src="image/3.13.png"/>
-</div>
-
-这样的排序给了用户更多自由
+  <div>
+      <img src="gif/sort.gif"/>
+  </div>
 
 #### 8.点击“筛选”则可对当前的表格的内容进行筛选
 
-<div>
-    <img src="image/3.14.png"/>
-</div>
 
 此处的筛选其实是一个查找/匹配的过程，查询目标可以选择全部或学号、姓名等，查找模式有部分匹配，前缀匹配，后缀匹配。而查找精度提供了正则表达式，大小写敏感，使用和通配符(?和*)三个选项，可以帮助用户在繁杂而冗余的数据中快速定位。其中正则表达式会覆盖前面的内容，为最高级精度。
 
-如以下例子：显示“住址”中含有关键字“州”的学生
-
 <div>
-    <img src="image/3.15.png"/>
+    <img src="gif/filter.gif"/>
 </div>
-
-如以下例子：使用了通配符*，搜索了形如U...A的内容
-
-<div>
-    <img src="image/3.152.png"/>
-</div>
-
-
-
-## <div STYLE="page-break-after: always;"></div>
 
 #### 9.点击“保存”或使用快捷键“Ctrl+S”则可保存当前的表格的内容
 
@@ -346,26 +305,17 @@ StuDialog、SortDialog、LoginDialog、 FilterDialog 本质上都只是获取信
 当文件为新建时，保存执行的实际就是另存为的操作。当保存成功后，窗口名会改成保存后的文件名。之后，保存和另存为的行为便有了差异：保存是将修改后的内容保存在```StuSubWindow```类的文件路径里，而另存为是将文件按照其他名字保存在另外的目录下。
 
 <div>
-    <img src="image/3.16.png" width="80%"/>
-</div>
-
-可以看到保存后的文件如下：
-
-<div>
-    <img src="image/3.17.png" width="70%"/>
+    <img src="gif/save.gif"/>
 </div>
 
 而引入文件保存和记录了文件路径后，便可以通过记录是否修改来对关闭和打开事件维护
 
 - 若打开了已打开的文件路径对应的文件，则直接跳转到已打开的窗口
-
 - 若修改文件（或者新建的文件）未保存而直接关闭，系统会发出提示和警告
 
-  <div>
-      <img src="image/3.18.png" width="70%"/>
-  </div>
-
-## <div STYLE="page-break-after: always;"></div>
+<div>
+    <img src="gif/close.gif"/>
+</div>
 
 #### 11.一些界面显示上的额外功能
 
@@ -377,37 +327,22 @@ StuDialog、SortDialog、LoginDialog、 FilterDialog 本质上都只是获取信
 
 - 视窗窗口模式：
 
-  <div>
-      <img src="image/3.19.png" width="70%"/>
-  </div>
-
 - 窗口重叠排列：
-
-  <div>
-      <img src="image/3.20.png" width="70%"/>
-  </div>
 
 - 窗口整齐排列：
 
-  <div>
-      <img src="image/3.21.png" width="70%"/>
-  </div>
 
 ##### (2) 工具栏和状态栏的显示/隐藏
 
-这个功能其实是看样例程序里有就加上去的，虽然也有点鸡肋。
-
-<div>
-    <img src="image/3.22.png" width="70%"/>
-</div>
 
 ##### (3)主题的更换
 
 程序默认显示的是我用qss美化过的界面，因此我提供了“换肤”操作，可以切换主题
 
 <div>
-    <img src="image/3.23.png" width="70%"/>
+    <img src="gif/view.gif"/>
 </div>
+
 
 <div STYLE="page-break-after: always;"></div>
 
@@ -416,6 +351,7 @@ StuDialog、SortDialog、LoginDialog、 FilterDialog 本质上都只是获取信
 点击关于，会显示程序相关信息，可以通过该链接得到关于该程序的更多信息
 
 <div>
-    <img src="image/3.24.png"/>
+    <img src="gif/about.gif"/>
 </div>
+
 
